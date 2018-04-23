@@ -5,15 +5,25 @@ public class Reserva {
     int idUsuario;
     String idRecurso;
     String recurso;
+    Boolean activa;
 
     public Reserva() {
     }
 
-    public Reserva(String idReserva, int idUsuario, String idRecurso, String recurso) {
+    public Reserva(String idReserva, int idUsuario, String idRecurso, String recurso, boolean activa) {
         this.idReserva = idReserva;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.recurso = recurso;
+        this.activa = activa;
+    }
+
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
     }
 
     public String getIdReserva() {
@@ -55,6 +65,7 @@ public class Reserva {
                 ", idUsuario=" + idUsuario +
                 ", idRecurso=" + idRecurso +
                 ", recurso='" + recurso + '\'' +
+                ", activa=" + activa +
                 '}';
     }
 }

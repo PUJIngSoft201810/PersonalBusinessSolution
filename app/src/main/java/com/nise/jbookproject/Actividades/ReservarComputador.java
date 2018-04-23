@@ -2,13 +2,14 @@ package com.nise.jbookproject.Actividades;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.nise.jbookproject.Modulos.AdapterComputador;
 import com.nise.jbookproject.Modulos.Computador;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
+import com.nise.jbookproject.Modulos.RecyclerTouchListener;
 import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.Modulos.TipoComputador;
 import com.nise.jbookproject.R;
@@ -26,21 +28,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservarComputador extends AppCompatActivity {
-    Button buttonReserva;
+    //Button buttonReserva;
     Button buttonCrear;
-    EditText textId;
+    //EditText textId;
     RecyclerView rv;
     List<Computador> computadores;
     AdapterComputador adapterComputador;
-    int id = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar_computador);
-        buttonReserva = (Button) findViewById(R.id.reservarButton);
+        //buttonReserva = (Button) findViewById(R.id.reservarButton);
         buttonCrear = (Button) findViewById(R.id.crearComp);
-        textId = (EditText) findViewById(R.id.idComputador);
+        ///textId = (EditText) findViewById(R.id.idComputador);
         rv = (RecyclerView) findViewById(R.id.recyclerComputador);
         rv.setLayoutManager(new LinearLayoutManager(this));
         computadores = new ArrayList<>();
@@ -48,12 +49,37 @@ public class ReservarComputador extends AppCompatActivity {
         adapterComputador = new AdapterComputador(computadores);
         Log.i("ADAPTER", "Adapter creado");
 
+        rv.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
+        rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adapterComputador);
+
 
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
         final DatabaseReference reservaRef = proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE);
-        final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFEREBCE);
+        final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFERENCE);
         final DatabaseReference computadoresRef = recursosRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
+
+        rv.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), rv, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Computador computador = computadores.get(position);
+                Toast.makeText(getApplicationContext(), computador.getId() + " reservado", Toast.LENGTH_SHORT).show();
+                computador.setReservado(true);
+                computadoresRef.child(computador.getId()).setValue(computador);
+
+                Reserva reserva = new Reserva("Prueba",1032428174,computadores.get(position).getId(),computadores.get(position).getDescripcion(),true);
+                DatabaseReference miReserva = reservaRef.push();
+                reserva.setIdReserva(miReserva.getKey().toString());
+                miReserva.setValue(reserva);
+
+                adapterComputador.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
         computadoresRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,7 +91,10 @@ public class ReservarComputador extends AppCompatActivity {
                         ) {
                     Computador computador = snapshot.getValue(Computador.class);
                     Log.i("ADAPTER",computador.toString());
-                    computadores.add(computador);
+                    if(!computador.isReservado())
+                    {
+                        computadores.add(computador);
+                    }
                 }
                 adapterComputador.notifyDataSetChanged();
             }
@@ -76,12 +105,7 @@ public class ReservarComputador extends AppCompatActivity {
             }
         });
 
-        buttonReserva.setOnClickListener(new View.OnClickListener() {
-            /*if (TextUtils.isEmpty(textId)) {
-                textId.setError("Required.");
-            } else {
-                textId.setError(null);
-            }*/
+        /*buttonReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i < computadores.size(); i++)
@@ -98,7 +122,7 @@ public class ReservarComputador extends AppCompatActivity {
                 //Computador computador = new Computador(101,"portail a15",false,"sotano 1", TipoComputador.PORTATIL);
                 //computadoresRef.push().setValue(computador);
             }
-        });
+        });*/
         buttonCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,16 +133,5 @@ public class ReservarComputador extends AppCompatActivity {
                 miComputador.setValue(computador);
             }
         });
-    }
-    private boolean validateForm() {
-        boolean valid = true;
-        String email = textId.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            textId.setError("Required.");
-            valid = false;
-        } else {
-            textId.setError(null);
-        }
-        return valid;
     }
 }

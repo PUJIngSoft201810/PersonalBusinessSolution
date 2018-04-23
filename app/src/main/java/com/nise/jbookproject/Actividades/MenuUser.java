@@ -14,8 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
 import com.nise.jbookproject.R;
 
+
 public class MenuUser extends AppCompatActivity implements View.OnClickListener {
-    Button buttonConsulta, buttonReserva;
+    Button buttonConsulta, buttonReserva, buttonRegresar;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -28,6 +29,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_menu_user);
         buttonConsulta = (Button) findViewById(R.id.consultaButton);
         buttonReserva = (Button) findViewById(R.id.reservaButton);
+        buttonRegresar = (Button) findViewById(R.id.regresarButton);
         buttonConsulta.setOnClickListener(this);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -35,29 +37,23 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Reserva reserva = new Reserva(10452,1032428174,1154,"Portatil");
-                //proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE).push().setValue(reserva);
                 startActivity(new Intent(MenuUser.this, MenuReserva.class));
-                //reservaRef.child(FirebaseReferences.RESERVA_REFERENCE).push().setValue(reserva);
             }
         });
         buttonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuUser.this, ConsultaReservas.class));
+                startActivity(new Intent(MenuUser.this, HistorialReservas.class));
             }
         });
-    }
-    /*public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.consultaButton:
-                startActivity(new Intent(this, ConsultaReservas.class));
+        buttonRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuUser.this, ConsultarReservasActivas.class));
+            }
+        });
 
-                break;
-           }
-    }*/
+    }
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -72,7 +68,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
             startActivity(intent);
         }else if (itemClicked == R.id.menuSettings){
 //Abrir actividad para configuración etc
-            Intent intent = new Intent(this, ConsultaReservas.class);
+            Intent intent = new Intent(this, HistorialReservas.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }

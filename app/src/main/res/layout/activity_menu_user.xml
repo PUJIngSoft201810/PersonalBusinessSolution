@@ -24,4 +24,13 @@
         android:layout_alignTop="@+id/consultaButton"
         android:layout_marginEnd="84dp"
         android:text="reservar" />
+
+    <Button
+        android:id="@+id/regresarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/consultaButton"
+        android:layout_marginBottom="218dp"
+        android:text="Regresar" />
 </RelativeLayout>

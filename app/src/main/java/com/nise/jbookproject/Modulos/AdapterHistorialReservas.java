@@ -7,15 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import com.nise.jbookproject.R;
 
 import java.util.List;
 
-public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ReservasViewHolder>{
+public class AdapterHistorialReservas extends RecyclerView.Adapter<AdapterHistorialReservas.ReservasViewHolder>{
 
     List<Reserva> reservas;
 
-    public AdapterReserva(List<Reserva> reservas) {
+    public AdapterHistorialReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
 
@@ -31,7 +32,7 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.Reservas
     public void onBindViewHolder(@NonNull ReservasViewHolder holder, int position) {
         //LO QUE SE QUIERE HACER
         Reserva reserva = reservas.get(position);
-        holder.textViewRecurso.setText("Recurso: "+reserva.getRecurso() + "\n   Id usuario: " + reserva.getIdUsuario()+ "\n");
+        holder.textViewRecurso.setText("Recurso: "+reserva.getIdRecurso() + "\n   Id usuario: " + reserva.getIdUsuario()+ "\n Activa: " +reserva.getActiva()+ "\n");
         //holder.textViewRecurso.setText(reserva.getRecurso());
         //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
     }

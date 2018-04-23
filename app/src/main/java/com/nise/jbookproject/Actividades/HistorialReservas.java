@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nise.jbookproject.Modulos.AdapterReserva;
+import com.nise.jbookproject.Modulos.AdapterHistorialReservas;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
 import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.R;
@@ -20,16 +20,16 @@ import com.nise.jbookproject.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultaReservas extends AppCompatActivity {
+public class HistorialReservas extends AppCompatActivity {
 
     RecyclerView rv;
     List<Reserva> reservas;
 
-    AdapterReserva adapter;
+    AdapterHistorialReservas adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta_reservas);
+        setContentView(R.layout.activity_historial_reservas);
 
         rv = (RecyclerView) findViewById(R.id.recycler);
         //rv.setHasFixedSize(true);
@@ -41,14 +41,16 @@ public class ConsultaReservas extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        adapter = new AdapterReserva(reservas);
+        adapter = new AdapterHistorialReservas(reservas);
 
         rv.setAdapter(adapter);
         Log.i("ADAPTER", "Adapter creado");
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
-        DatabaseReference reservaRef= proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE);
-        Log.i("ADAPTER", "Parent "+ reservaRef.toString());
+        final DatabaseReference reservaRef = proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE);
+        final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFERENCE);
+        final DatabaseReference computadoresRef = recursosRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
 
+        Log.i("ADAPTER", "Parent "+ reservaRef.toString());
         reservaRef.addValueEventListener(new ValueEventListener() {
             @Override
 
