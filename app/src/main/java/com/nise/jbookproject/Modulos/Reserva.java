@@ -1,21 +1,43 @@
 package com.nise.jbookproject.Modulos;
 
+import java.util.Date;
+
 public class Reserva {
     String idReserva;
-    int idUsuario;
+    String idUsuario;
     String idRecurso;
     String recurso;
     Boolean activa;
+    Date fecha_inicio;
+    Date fecha_fin;
 
     public Reserva() {
     }
 
-    public Reserva(String idReserva, int idUsuario, String idRecurso, String recurso, boolean activa) {
+    public Reserva(String idReserva, String idUsuario, String idRecurso, String recurso, boolean activa,Date fecha_inicio, Date fecha_fin) {
         this.idReserva = idReserva;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.recurso = recurso;
         this.activa = activa;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+    }
+
+    public Date getFecha_inicio() {
+        return fecha_inicio;
+    }
+
+    public void setFecha_inicio(Date fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
+    public Date getFecha_fin() {
+        return fecha_fin;
+    }
+
+    public void setFecha_fin(Date fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
 
     public Boolean getActiva() {
@@ -34,11 +56,11 @@ public class Reserva {
         this.idReserva = idReserva;
     }
 
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

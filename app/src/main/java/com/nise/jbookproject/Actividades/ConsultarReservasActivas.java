@@ -20,6 +20,8 @@ import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,15 +64,20 @@ public class ConsultarReservasActivas extends AppCompatActivity {
                 Reserva reserva = reservas.get(position);
                 reserva.setActiva(false);
 
-                DatabaseReference miCompu = computadoresRef.child(reserva.getIdRecurso());
-                Map<String, Object> hopperUpdatesCompu = new HashMap<>();
-                hopperUpdatesCompu.put("reservado", false);
-                miCompu.updateChildren(hopperUpdatesCompu);
+                DatabaseReference miRecurso = recursosRef.child(reserva.getIdRecurso());
+                Map<String, Object> hopperUpdatesRecu = new HashMap<>();
+                hopperUpdatesRecu.put("reservado", false);
+                miRecurso.updateChildren(hopperUpdatesRecu);
 
                 DatabaseReference miReserva = reservasRef.child(reserva.getIdReserva());
                 Map<String, Object> hopperUpdatesRes = new HashMap<>();
                 hopperUpdatesRes.put("activa", false);
                 miReserva.updateChildren(hopperUpdatesRes);
+
+                Date fecha_fin = Calendar.getInstance().getTime();
+                Map<String, Object> hopperUpdatesR = new HashMap<>();
+                hopperUpdatesR.put("fecha_fin", fecha_fin);
+                miReserva.updateChildren(hopperUpdatesR);
 
                 Toast.makeText(getApplicationContext(), reserva.getIdReserva() + " recurso regresado", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();

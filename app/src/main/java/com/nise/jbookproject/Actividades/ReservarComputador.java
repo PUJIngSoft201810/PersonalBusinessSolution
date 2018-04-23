@@ -25,6 +25,8 @@ import com.nise.jbookproject.Modulos.TipoComputador;
 import com.nise.jbookproject.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ReservarComputador extends AppCompatActivity {
@@ -67,7 +69,9 @@ public class ReservarComputador extends AppCompatActivity {
                 computador.setReservado(true);
                 computadoresRef.child(computador.getId()).setValue(computador);
 
-                Reserva reserva = new Reserva("Prueba",1032428174,computadores.get(position).getId(),computadores.get(position).getDescripcion(),true);
+                Date fecha_inicio, fecha_fin = null;
+                fecha_inicio = Calendar.getInstance().getTime();
+                Reserva reserva = new Reserva("Prueba","1032428174",computadores.get(position).getId(),computadores.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
                 DatabaseReference miReserva = reservaRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());
                 miReserva.setValue(reserva);

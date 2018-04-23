@@ -38,6 +38,11 @@ public class Libro extends Recurso {
         this.isbn = isbn;
     }
 
+    public  Libro()
+    {
+
+    }
+
     @Override
     public String toString() {
         return "Libro{" +
