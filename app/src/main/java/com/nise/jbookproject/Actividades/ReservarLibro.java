@@ -73,8 +73,11 @@ public class ReservarLibro extends AppCompatActivity {
 
                 Date fecha_inicio, fecha_fin;
                 fecha_inicio = Calendar.getInstance().getTime();
-                Calendar.getInstance().add(Calendar.DATE,15);
-                fecha_fin = Calendar.getInstance().getTime();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(fecha_inicio);
+                cal.add(Calendar.DAY_OF_YEAR, 15);
+                fecha_fin = cal.getTime();
+
                 Reserva reserva = new Reserva("Prueba","1032428174",libros.get(position).getId(),libros.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
                 DatabaseReference miReserva = reservaRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());

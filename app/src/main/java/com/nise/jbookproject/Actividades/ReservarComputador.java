@@ -109,28 +109,10 @@ public class ReservarComputador extends AppCompatActivity {
             }
         });
 
-        /*buttonReserva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int i = 0; i < computadores.size(); i++)
-                {
-                    Log.i("PRUEBA","ENTRO PARCE "+computadores.get(i).getId());
-                    if(computadores.get(i).getId().equals("-LAYnEi8AjRSS218Fs3d"))
-                    {
-                        Reserva reserva = new Reserva("Prueba",1032428174,computadores.get(i).getId(),computadores.get(i).getDescripcion());
-                        DatabaseReference miReserva = reservaRef.push();
-                        reserva.setIdReserva(miReserva.getKey().toString());
-                        miReserva.setValue(reserva);
-                    }
-                }
-                //Computador computador = new Computador(101,"portail a15",false,"sotano 1", TipoComputador.PORTATIL);
-                //computadoresRef.push().setValue(computador);
-            }
-        });*/
         buttonCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Computador computador = new Computador("Prueba","portail a15",false,"sotano 1", TipoComputador.PORTATIL);
+                Computador computador = new Computador("Prueba","portail",false,"sotano 1", TipoComputador.PORTATIL);
                 //computadoresRef.push().setValue(computador);
                 DatabaseReference miComputador = computadoresRef.push();
                 computador.setId(miComputador.getKey().toString());
