@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Actividades.ReservarComputador">
+
+    <TextView
+        android:id="@+id/tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:autoText="false"
+        android:text="Reservar Computador"
+        tools:fontFamily="sans-serif" />
+
+    <EditText
+        android:id="@+id/idComputador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="138dp"
+        android:contentDescription="Id computador"
+        android:ems="10"
+        android:hint="ID Computador"
+        android:inputType="numberSigned" />
+
+    <Button
+        android:id="@+id/reservarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="58dp"
+        android:text="Reserva" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerComputador"
+        android:layout_width="match_parent"
+        android:layout_height="307dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:theme="@android:style/Animation" />
+
+    <Button
+        android:id="@+id/crearComp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/reservarButton"
+        android:layout_centerHorizontal="true"
+        android:text="crearcomputador" />
+
+</RelativeLayout>
