@@ -1,6 +1,8 @@
 package com.nise.jbookproject.Modulos;
 
-public class Recurso {
+import java.io.Serializable;
+
+public class Recurso implements Serializable{
     String id;
     String descripcion;
     //estado = 0 disponible
@@ -8,6 +10,15 @@ public class Recurso {
 
     boolean reservado;
     String ubicacion;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public String getId() {
         return id;
@@ -50,6 +61,15 @@ public class Recurso {
         this.reservado = reservado;
         this.ubicacion = ubicacion;
     }
+
+    public Recurso(String id, String nombre, String descripcion, boolean reservado, String ubicacion) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.reservado = reservado;
+        this.ubicacion = ubicacion;
+        this.nombre = nombre;
+    }
+
     @Override
     public String toString() {
         return "Recurso{" +
