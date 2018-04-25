@@ -32,7 +32,7 @@ public class AdapterHistorialReservas extends RecyclerView.Adapter<AdapterHistor
     public void onBindViewHolder(@NonNull ReservasViewHolder holder, int position) {
         //LO QUE SE QUIERE HACER
         Reserva reserva = reservas.get(position);
-        holder.textViewRecurso.setText("Recurso: "+reserva.getIdRecurso() + "\n   Id usuario: " + reserva.getIdUsuario()+ "\n Activa: " +reserva.getActiva()+ "\n Fecha inicio: " + reserva.getFecha_inicio() + "\n Fecha fin: " + reserva.getFecha_fin() + "\n");
+        holder.textViewRecurso.setText("Id Reserva: " + reserva.getIdReserva() + "\n\tId Recurso: "+reserva.getIdRecurso() +"\n\tTipo de recurso: "+reserva.getRecurso()+ "\n\tId Usuario: " + reserva.getIdUsuario()+ "\n\tRserva Activa: " +reserva.getActiva()+ "\n\tFecha inicio: " + reserva.getFecha_inicio() + "\n\tFecha fin: " + reserva.getFecha_fin() + "\n");
         //holder.textViewRecurso.setText(reserva.getRecurso());
         //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
     }

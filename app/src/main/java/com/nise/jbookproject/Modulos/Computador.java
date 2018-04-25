@@ -20,10 +20,9 @@ public class Computador extends Recurso {
     public Computador(String id, String descripcion, boolean reservado, String ubicacion) {
         super(id, descripcion, reservado, ubicacion);
     }
-    public Computador(){
+    public Computador() {
 
     }
-
     @Override
     public String toString() {
         return "Computador{" +

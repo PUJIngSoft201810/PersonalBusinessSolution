@@ -31,7 +31,7 @@ public class AdapterLibro extends RecyclerView.Adapter<AdapterLibro.LibrosViewHo
         //LO QUE SE QUIERE HACER
 
         Libro libro= libros.get(position);
-        holder.textViewLibro.setText("Libro: "+libro.getDescripcion()+ "\n   Id libro: " + libro.getId()+ "\n");
+        holder.textViewLibro.setText("Id Libro: "+ libro.getId()+"\n\tAutor: "+libro.getAutor()+ "\n\tTitulo: " + libro.getTitulo()+ "\n\tISBN: " + libro.getIsbn() + "\n\tUbicacion: "+libro.getUbicacion()+"\n");
         //holder.textViewRecurso.setText(reserva.getRecurso());
         //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
     }

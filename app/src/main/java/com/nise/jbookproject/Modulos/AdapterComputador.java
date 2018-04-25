@@ -32,9 +32,8 @@ public class AdapterComputador extends RecyclerView.Adapter<AdapterComputador.Co
         //LO QUE SE QUIERE HACER
 
         Computador computador = computadores.get(position);
-        holder.textViewComputador.setText("Computador: "+computador.getDescripcion()+ "\n   Id computador: " + computador.getId()+ "\n");
-        //holder.textViewRecurso.setText(reserva.getRecurso());
-        //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
+        holder.textViewComputador.setText("Id recurso: "+ computador.getId() + "\n\tComputador: "+computador.getDescripcion()+ "\n\t Reservado: " + computador.isReservado()+ "\n\tUbicacion: " + computador.getUbicacion() + "\n");
+
     }
 
     @Override
