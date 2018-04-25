@@ -59,7 +59,8 @@ public class ReservarComputador extends AppCompatActivity {
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
         final DatabaseReference reservaRef = proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE);
         final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFERENCE);
-        final DatabaseReference computadoresRef = recursosRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
+        final DatabaseReference computadoresRecRef = recursosRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
+        final DatabaseReference computadoresResRef = reservaRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
 
         rv.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), rv, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -67,12 +68,12 @@ public class ReservarComputador extends AppCompatActivity {
                 Computador computador = computadores.get(position);
                 Toast.makeText(getApplicationContext(), computador.getId() + " reservado", Toast.LENGTH_SHORT).show();
                 computador.setReservado(true);
-                computadoresRef.child(computador.getId()).setValue(computador);
+                computadoresRecRef.child(computador.getId()).setValue(computador);
 
                 Date fecha_inicio, fecha_fin = null;
                 fecha_inicio = Calendar.getInstance().getTime();
                 Reserva reserva = new Reserva("Prueba","1032428174",computadores.get(position).getId(),computadores.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
-                DatabaseReference miReserva = reservaRef.push();
+                DatabaseReference miReserva = computadoresResRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());
                 miReserva.setValue(reserva);
 
@@ -85,7 +86,7 @@ public class ReservarComputador extends AppCompatActivity {
             }
         }));
 
-        computadoresRef.addValueEventListener(new ValueEventListener() {
+        computadoresRecRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 computadores.removeAll(computadores);
@@ -113,8 +114,8 @@ public class ReservarComputador extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Computador computador = new Computador("Prueba","portail",false,"sotano 1", TipoComputador.PORTATIL);
-                //computadoresRef.push().setValue(computador);
-                DatabaseReference miComputador = computadoresRef.push();
+                //computadoresRecRef.push().setValue(computador);
+                DatabaseReference miComputador = computadoresRecRef.push();
                 computador.setId(miComputador.getKey().toString());
                 miComputador.setValue(computador);
             }

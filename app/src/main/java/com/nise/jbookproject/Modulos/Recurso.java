@@ -2,6 +2,7 @@ package com.nise.jbookproject.Modulos;
 
 public class Recurso {
     String id;
+    String nombre;
     String descripcion;
     //estado = 0 disponible
     //       = 1 reservado
@@ -46,6 +47,13 @@ public class Recurso {
     }
     public Recurso(String id, String descripcion, boolean reservado, String ubicacion) {
         this.id = id;
+        this.descripcion = descripcion;
+        this.reservado = reservado;
+        this.ubicacion = ubicacion;
+    }
+    public Recurso(String id,String nombre, String descripcion, boolean reservado, String ubicacion) {
+        this.id = id;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.reservado = reservado;
         this.ubicacion = ubicacion;
