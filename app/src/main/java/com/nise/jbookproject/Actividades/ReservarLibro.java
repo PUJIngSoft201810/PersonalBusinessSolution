@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +40,8 @@ public class ReservarLibro extends AppCompatActivity {
     RecyclerView rv;
     List<Libro> libros;
     AdapterLibro adapterLibro;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +82,11 @@ public class ReservarLibro extends AppCompatActivity {
                 cal.add(Calendar.DAY_OF_YEAR, 15);
                 fecha_fin = cal.getTime();
 
-                Reserva reserva = new Reserva("Prueba","1032428174",libros.get(position).getId(),libros.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
+                mAuth = FirebaseAuth.getInstance();
+                String idUser = mAuth.getUid();
+                Log.i("USER ","Usuario :"+idUser);
+
+                Reserva reserva = new Reserva("Prueba",idUser,libros.get(position).getId(),libros.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
                 DatabaseReference miReserva = librosResRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());
                 miReserva.setValue(reserva);

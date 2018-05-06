@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,8 @@ public class ReservarComputador extends AppCompatActivity {
     RecyclerView rv;
     List<Computador> computadores;
     AdapterComputador adapterComputador;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,14 @@ public class ReservarComputador extends AppCompatActivity {
 
                 Date fecha_inicio, fecha_fin = null;
                 fecha_inicio = Calendar.getInstance().getTime();
-                Reserva reserva = new Reserva("Prueba","1032428174",computadores.get(position).getId(),computadores.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
+
+                //Editar
+                mAuth = FirebaseAuth.getInstance();
+                String idUser = mAuth.getUid();
+                Log.i("USER ","Usuario :"+idUser);
+                //Editar
+
+                Reserva reserva = new Reserva("Prueba",idUser,computadores.get(position).getId(),computadores.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
                 DatabaseReference miReserva = computadoresResRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());
                 miReserva.setValue(reserva);
