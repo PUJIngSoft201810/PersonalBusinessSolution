@@ -31,9 +31,12 @@ public class AdapterLibro extends RecyclerView.Adapter<AdapterLibro.LibrosViewHo
         //LO QUE SE QUIERE HACER
 
         Libro libro= libros.get(position);
-        holder.textViewLibro.setText("Id Libro: "+ libro.getId()+"\n\tAutor: "+libro.getAutor()+ "\n\tTitulo: " + libro.getTitulo()+ "\n\tISBN: " + libro.getIsbn() + "\n\tUbicacion: "+libro.getUbicacion()+"\n");
-        //holder.textViewRecurso.setText(reserva.getRecurso());
-        //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
+        holder.textViewIdLibro.setText("Id: " + libro.getId());
+        holder.textViewDescripcionLibro.setText("Descripcion: " + libro.getDescripcion());
+        holder.textViewTituloLibro.setText("Titulo: " + libro.getTitulo());
+        holder.textViewAutorLibro.setText("Autor: " + libro.getAutor());
+        holder.textViewIsbnLibro.setText("ISBN: " + libro.getIsbn());
+        holder.textViewUbicacionLibro.setText("Ubicacion: " + libro.getUbicacion());
     }
 
     @Override
@@ -43,12 +46,16 @@ public class AdapterLibro extends RecyclerView.Adapter<AdapterLibro.LibrosViewHo
 
     public static class LibrosViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewLibro, textViewIdUsuario;
+        TextView textViewIdLibro, textViewTituloLibro, textViewDescripcionLibro, textViewAutorLibro, textViewIsbnLibro, textViewUbicacionLibro;
         public LibrosViewHolder(View itemView) {
             super(itemView);
 
-            textViewLibro = itemView.findViewById(R.id.textview_libro);
-            //  textViewIdUsuario = itemView.findViewById(R.id.textview_idusuario);
+            textViewIdLibro = itemView.findViewById(R.id.textview_IdLibro);
+            textViewDescripcionLibro = itemView.findViewById(R.id.textview_DescripcionLibro);
+            textViewTituloLibro= itemView.findViewById(R.id.textview_TituloLibro);
+            textViewAutorLibro = itemView.findViewById(R.id.textview_AutorLibro);
+            textViewIsbnLibro = itemView.findViewById(R.id.textview_IsbnLibro);
+            textViewUbicacionLibro = itemView.findViewById(R.id.textview_UbicacionLibro);
         }
     }
 }

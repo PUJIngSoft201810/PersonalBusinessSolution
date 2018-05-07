@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
@@ -8,9 +8,52 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textview_libro"
-        android:layout_width="match_parent"
-        android:layout_height="67dp" />
+        android:id="@+id/textview_IdLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_id"
+        android:textSize="@dimen/recurso_id" />
+
+    <TextView
+        android:id="@+id/textview_TituloLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion" />
+
+    <TextView
+        android:id="@+id/textview_DescripcionLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion" />
+
+    <TextView
+        android:id="@+id/textview_AutorLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion" />
+
+    <TextView
+        android:id="@+id/textview_IsbnLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion" />
+
+    <TextView
+        android:id="@+id/textview_UbicacionLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion" />
 
 
-</RelativeLayout>
+</LinearLayout>

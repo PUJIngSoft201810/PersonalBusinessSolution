@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="181dp"
+        android:layout_marginBottom="221dp"
+        android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
         android:hint="Password"
-        android:drawableLeft="@drawable/ic_action_password"
-        android:textSize="16dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textSize="16dp" />
 
     <EditText
         android:id="@+id/email"
@@ -26,10 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="251dp"
+        android:layout_marginBottom="289dp"
+        android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
         android:hint="Email"
-        android:drawableLeft="@drawable/ic_action_user"
         android:inputType="textEmailAddress"
         android:textSize="16dp" />
 
@@ -37,9 +37,9 @@
         android:id="@+id/signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/register"
+        android:layout_marginStart="81dp"
         android:text="Log In" />
 
     <Button
@@ -47,17 +47,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="74dp"
+        android:layout_marginEnd="81dp"
         android:text="Register" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="251dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        app:srcCompat="@drawable/logo_blanco" />
+        android:layout_marginTop="18dp"
+        app:srcCompat="@drawable/logo_verde" />
 
 </RelativeLayout>

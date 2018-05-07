@@ -12,6 +12,22 @@
         android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
         android:text="Reservar Consola" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerConsola"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="58dp" />
+
+    <Button
+        android:id="@+id/crearCons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_below="@+id/recyclerConsola"
+        android:layout_marginTop="-58dp"
+        android:text="Crear consola" />
 </RelativeLayout>
