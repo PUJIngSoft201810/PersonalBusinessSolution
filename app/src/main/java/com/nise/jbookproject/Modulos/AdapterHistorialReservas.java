@@ -23,7 +23,7 @@ public class AdapterHistorialReservas extends RecyclerView.Adapter<AdapterHistor
     @NonNull
     @Override
     public ReservasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowreserva_recycler,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recycler_reserva,parent,false);
         ReservasViewHolder holder = new ReservasViewHolder(v);
         return  holder;
     }
@@ -32,9 +32,13 @@ public class AdapterHistorialReservas extends RecyclerView.Adapter<AdapterHistor
     public void onBindViewHolder(@NonNull ReservasViewHolder holder, int position) {
         //LO QUE SE QUIERE HACER
         Reserva reserva = reservas.get(position);
-        holder.textViewRecurso.setText("Id Reserva: " + reserva.getIdReserva() + "\n\tId Recurso: "+reserva.getIdRecurso() +"\n\tTipo de recurso: "+reserva.getRecurso()+ "\n\tId Usuario: " + reserva.getIdUsuario()+ "\n\tRserva Activa: " +reserva.getActiva()+ "\n\tFecha inicio: " + reserva.getFecha_inicio() + "\n\tFecha fin: " + reserva.getFecha_fin() + "\n");
-        //holder.textViewRecurso.setText(reserva.getRecurso());
-        //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
+        holder.textViewIdReserva.setText("Id Reserva: " + reserva.getIdReserva());
+        holder.textViewIdRecurso.setText("Id Recurso: " + reserva.getIdRecurso());
+        holder.textViewIdUsuario.setText("Id Usuario: " + reserva.getIdUsuario());
+        holder.textViewFechaInicio.setText("Fecha Inicio: " + reserva.getFecha_inicio());
+        holder.textViewFechaFin.setText("Fecha Fin: " + reserva.getFecha_fin());
+        holder.textViewRecurso.setText("Recurso: " + reserva.getRecurso());
+        holder.textViewEstado.setText("Activa: " + reserva.getActiva());
     }
 
     @Override
@@ -44,10 +48,17 @@ public class AdapterHistorialReservas extends RecyclerView.Adapter<AdapterHistor
 
     public static class ReservasViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewRecurso, textViewIdUsuario;
+        TextView textViewIdReserva, textViewIdUsuario, textViewIdRecurso, textViewRecurso, textViewFechaInicio, textViewFechaFin, textViewEstado;
         public ReservasViewHolder(View itemView) {
             super(itemView);
-            textViewRecurso = itemView.findViewById(R.id.textview_recurso);
+            textViewRecurso = itemView.findViewById(R.id.textview_Recurso);
+            textViewIdReserva = itemView.findViewById(R.id.textview_IdReserva);
+            textViewIdRecurso = itemView.findViewById(R.id.textview_IdRecurso);
+            textViewIdUsuario = itemView.findViewById(R.id.textview_IdUsuario);
+            textViewFechaInicio = itemView.findViewById(R.id.textview_FechaInicio);
+            textViewFechaFin = itemView.findViewById(R.id.textview_FechaFin);
+            textViewEstado = itemView.findViewById(R.id.textview_Estado);
+
             //  textViewIdUsuario = itemView.findViewById(R.id.textview_idusuario);
         }
     }

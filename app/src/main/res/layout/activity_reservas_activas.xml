@@ -9,7 +9,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerComp"
         android:layout_width="match_parent"
-        android:layout_height="205dp"
+        android:layout_height="142dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewComputador"
         android:scrollbars="vertical" />
@@ -17,7 +17,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerLib"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="143dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewLibros"
         android:scrollbars="vertical" />
@@ -26,9 +26,8 @@
         android:id="@+id/textViewLibros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textViewComputador"
-        android:layout_marginTop="242dp"
+        android:layout_below="@+id/recyclerComp"
         android:text="Libros" />
 
     <TextView
@@ -39,5 +38,35 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="21dp"
         android:text="Computadores" />
+
+    <TextView
+        android:id="@+id/textViewConsolas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewLibros"
+        android:layout_below="@+id/recyclerLib"
+        android:text="Consolas" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerCons"
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewConsolas" />
+
+    <TextView
+        android:id="@+id/textViewTelevisor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewLibros"
+        android:layout_below="@+id/recyclerCons"
+        android:text="Televisores" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerTel"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewTelevisor" />
 
 </RelativeLayout>

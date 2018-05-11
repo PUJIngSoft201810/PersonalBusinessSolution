@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview_IdReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_id"
+        android:textSize="@dimen/recurso_id"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_IdRecurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_IdUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_Recurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_FechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_FechaFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textview_Estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/recurso_descripcion"
+        android:textSize="@dimen/recurso_descripcion"
+        android:text="TextView" />
+
+
+</LinearLayout>

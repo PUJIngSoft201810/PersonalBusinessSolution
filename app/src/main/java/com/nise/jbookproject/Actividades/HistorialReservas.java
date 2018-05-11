@@ -52,6 +52,8 @@ public class HistorialReservas extends AppCompatActivity {
         final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFERENCE);
         final DatabaseReference computadoresResRef = reservaRef.child(FirebaseReferences.COMPUTADORES_REFERENCE);
         final DatabaseReference librosResRef = reservaRef.child(FirebaseReferences.LIBROS_REFERENCE);
+        final DatabaseReference consolasResRef = reservaRef.child(FirebaseReferences.CONSOLAS_REFERENCE);
+        final DatabaseReference televisoresResRef = reservaRef.child(FirebaseReferences.TELEVISORES_REFERENCE);
         Log.i("ADAPTER", "Parent "+ reservaRef.toString());
 
         computadoresResRef.addValueEventListener(new ValueEventListener() {
@@ -106,6 +108,56 @@ public class HistorialReservas extends AppCompatActivity {
             }
         });
 
+        consolasResRef.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("ADAPTER", "DataSnapshot"+dataSnapshot.toString());
+                //reservas.removeAll(reservas);
+                Log.i("ADAPTER", "Se removieron las reservas");
+                int i = 0;
+                for (DataSnapshot snapshot:
+                        dataSnapshot.getChildren()
+                        ) {
+                    Reserva reserva = snapshot.getValue(Reserva.class);
+                    Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
+                    reservas.add(reserva);
+                    i++;
+                }
+                adapter.notifyDataSetChanged();
+                Log.i("ADAPTER", "Se agregaron las reservas y se notifico" + i);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        televisoresResRef.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("ADAPTER", "DataSnapshot"+dataSnapshot.toString());
+                Log.i("ADAPTER", "Se removieron las reservas");
+                int i = 0;
+                for (DataSnapshot snapshot:
+                        dataSnapshot.getChildren()
+                        ) {
+                    Reserva reserva = snapshot.getValue(Reserva.class);
+                    Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
+                    reservas.add(reserva);
+                    i++;
+                }
+                adapter.notifyDataSetChanged();
+                Log.i("ADAPTER", "Se agregaron las reservas y se notifico" + i);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
