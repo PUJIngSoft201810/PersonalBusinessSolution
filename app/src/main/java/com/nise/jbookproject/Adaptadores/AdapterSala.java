@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nise.jbookproject.Actividades.ReservarSala;
 import com.nise.jbookproject.Modulos.Sala;
 import com.nise.jbookproject.R;
 
@@ -17,11 +20,9 @@ import java.util.ArrayList;
  */
 
 public class AdapterSala
-        extends RecyclerView.Adapter<AdapterSala.SalasViewHolder>
-        implements View.OnClickListener {
+        extends RecyclerView.Adapter<AdapterSala.SalasViewHolder> {
 
     private ArrayList<Sala> listaSalas;
-    private View.OnClickListener listener;
 
     public AdapterSala(ArrayList<Sala> listaSalas) {
         this.listaSalas = listaSalas;
@@ -32,8 +33,6 @@ public class AdapterSala
     public SalasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Infla la vista con el layout para cada row de la lista
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recycler_sala,null,false);
-        // Hace que view pueda escuchar el evento de seleccion
-        view.setOnClickListener(this);
         return new SalasViewHolder(view);
     }
 
@@ -49,16 +48,6 @@ public class AdapterSala
         return listaSalas.size();
     }
 
-    public void setOnClickListener(View.OnClickListener listener) {
-        this.listener = listener;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(listener != null) {
-            listener.onClick(v);
-        }
-    }
 
     public class SalasViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,7 +1,9 @@
 package com.nise.jbookproject.Actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,9 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nise.jbookproject.Adaptadores.AdapterSala;
+import com.nise.jbookproject.Modulos.RecyclerTouchListener;
 import com.nise.jbookproject.Modulos.Sala;
 import com.nise.jbookproject.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ReservarSala extends AppCompatActivity {
@@ -39,23 +43,34 @@ public class ReservarSala extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerSalas);
         // Establece la lista lineal y vertical
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         adapterSala = new AdapterSala(salas);
+
         recyclerView.setAdapter(adapterSala);
+
         eventoClickRow();
+
         configurarDB();
 
     }
 
     private void eventoClickRow() {
         //Logica de que realizar en evento onClick, NOTA: En AdapterSala se implementa interfaz onclicklistener
-        adapterSala.setOnClickListener(new View.OnClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onClick(View v) {
-                int posicionView = recyclerView.getChildAdapterPosition(v);
-                Sala salaActual = salas.get(posicionView);
+            public void onClick(View view, int position) {
+                //int posicionView = recyclerView.getChildAdapterPosition(view);
+                Sala salaActual = salas.get(position);
+                Intent intent = new Intent(ReservarSala.this, ReservarSalaDia.class);
+                intent.putExtra("objeto", (Serializable) salaActual);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
 
             }
-        });
+        }));
     }
 
     private void configurarDB() {
@@ -123,5 +138,16 @@ public class ReservarSala extends AppCompatActivity {
             i++;
         }
         return posicion;
+    }
+
+    public void addSala(View view) {
+        Sala sala1 = new Sala("1","sala a", "Tablero digital y tablero físico", false, "Piso 2", 6);
+        Sala sala2 = new Sala("2","sala z", "Televisor 40 pulgadas", false, "Sótano 1", 8);
+        DatabaseReference p1 = mDatabase.push();
+        sala1.setId(p1.getKey().toString());
+        p1.setValue(sala1);
+        DatabaseReference p2 = mDatabase.push();
+        sala2.setId(p2.getKey().toString());
+        p2.setValue(sala2);
     }
 }
