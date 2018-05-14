@@ -1,5 +1,6 @@
 package com.nise.jbookproject.Actividades;
 
+import android.content.Intent;
 import android.provider.CalendarContract;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,10 @@ import android.widget.TextView;
 import com.nise.jbookproject.Fragmentos.Dia1;
 import com.nise.jbookproject.Fragmentos.Dia2;
 import com.nise.jbookproject.Fragmentos.Dia3;
+import com.nise.jbookproject.Fragmentos.Dia4;
+import com.nise.jbookproject.Fragmentos.Dia5;
+import com.nise.jbookproject.Fragmentos.Dia6;
+import com.nise.jbookproject.Modulos.Sala;
 import com.nise.jbookproject.R;
 
 import java.text.SimpleDateFormat;
@@ -56,13 +61,16 @@ public class ReservarSalaDia extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), getIntent());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        //Enlaza tabLayout con mViewPager
+        tabLayout.setupWithViewPager(mViewPager);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -142,8 +150,16 @@ public class ReservarSalaDia extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        Intent intent;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            this.intent = null;
+        }
+
+        public SectionsPagerAdapter(FragmentManager fm, Intent intent) {
+            super(fm);
+            this.intent = intent;
         }
 
         @Override
@@ -151,13 +167,28 @@ public class ReservarSalaDia extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1);
+            Date today = Calendar.getInstance().getTime();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(today);
+            Sala salaActual = (Sala) intent.getSerializableExtra("objeto");
             switch (position) {
                 case 0:
-                    return Dia1.newInstance("hola1","hola");
+                    return Dia1.newInstance( salaActual, calendar.getTime());
                 case 1:
-                    return Dia2.newInstance("hola3","hola4");
+                    calendar.add(Calendar.DAY_OF_YEAR,1);
+                    return Dia2.newInstance(salaActual, calendar.getTime());
                 case 2:
-                    return Dia3.newInstance("hola6","hol5a");
+                    calendar.add(Calendar.DAY_OF_YEAR,2);
+                    return Dia3.newInstance(salaActual, calendar.getTime());
+                case 3:
+                    calendar.add(Calendar.DAY_OF_YEAR,3);
+                    return Dia4.newInstance(salaActual, calendar.getTime());
+                case 4:
+                    calendar.add(Calendar.DAY_OF_YEAR,4);
+                    return Dia5.newInstance(salaActual, calendar.getTime());
+                case 5:
+                    calendar.add(Calendar.DAY_OF_YEAR,5);
+                    return Dia6.newInstance(salaActual, calendar.getTime());
             }
             return null;
         }
@@ -165,31 +196,21 @@ public class ReservarSalaDia extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 6 total pages.
-            return 3;
+            return 6;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
-            /*Date today = Calendar.getInstance().getTime();
+
+            Date today = Calendar.getInstance().getTime();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(today);
 
             String dia;
-            //calendar.add(Calendar.DAY_OF_YEAR,1);
             switch (position) {
                 case 0:
                     dia = new SimpleDateFormat("EE", new Locale("es","ES")).format(calendar.getTime());
-                    return "as";
-                    //return dia;
+                    return dia;
                 case 1:
                     calendar.add(Calendar.DAY_OF_YEAR,1);
                     dia = new SimpleDateFormat("EE", new Locale("es","ES")).format(calendar.getTime());
@@ -211,7 +232,7 @@ public class ReservarSalaDia extends AppCompatActivity {
                     dia = new SimpleDateFormat("EE", new Locale("es","ES")).format(calendar.getTime());
                     return dia;
             }
-            return null;*/
+            return null;
         }
     }
 }
