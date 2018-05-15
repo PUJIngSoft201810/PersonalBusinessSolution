@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.Modulos.Sala;
 import com.nise.jbookproject.R;
 
@@ -32,8 +34,9 @@ public class Dia5 extends Fragment {
     private Date mParam2;
 
     private static final String TAG = "Dia4";
+    DatabaseReference mDatabase;
 
-    ArrayList<Date> horas;
+    ArrayList<Reserva> horas;
     RecyclerView recyclerView;
 
     private TextView titulo;
