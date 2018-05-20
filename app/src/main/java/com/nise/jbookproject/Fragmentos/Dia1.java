@@ -3,6 +3,7 @@ package com.nise.jbookproject.Fragmentos;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.nise.jbookproject.Actividades.ReservarSala;
 import com.nise.jbookproject.Adaptadores.AdapterDiaHora;
 import com.nise.jbookproject.Adaptadores.AdapterSala;
+import com.nise.jbookproject.Modulos.RecyclerTouchListener;
 import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.Modulos.Sala;
 import com.nise.jbookproject.R;
@@ -111,6 +114,7 @@ public class Dia1 extends Fragment {
         titulo.setText("");
         //titulo.setText(mParam2.toString());
         llenarLista();
+        eventoClickRow();
         configurarDB();
         return v;
     }
@@ -119,18 +123,24 @@ public class Dia1 extends Fragment {
         String idRecurso = this.mParam1.getId();
         Calendar fechaPrimera = Calendar.getInstance();
         fechaPrimera.setTime(mParam2);
-        fechaPrimera.set(Calendar.HOUR_OF_DAY,0);
+        int año = fechaPrimera.get(Calendar.YEAR);
+        int mes = fechaPrimera.get(Calendar.MONTH);
+        int diaMes = fechaPrimera.get(Calendar.DAY_OF_MONTH);
+        /*fechaPrimera.set(Calendar.HOUR_OF_DAY,0);
         fechaPrimera.set(Calendar.MINUTE,0);
         fechaPrimera.set(Calendar.SECOND,0);
         long milisFechaPrimera = fechaPrimera.getTimeInMillis();
         fechaPrimera.set(Calendar.HOUR_OF_DAY, 23);
         fechaPrimera.set(Calendar.MINUTE,59);
         fechaPrimera.set(Calendar.SECOND,59);
+        fechaPrimera.get(Calendar.YEAR);*/
         long milisFechaSegunda = fechaPrimera.getTimeInMillis();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("proyecto").child("reservas").child("salas");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabaseQuery = mDatabase.child("proyecto").child("reservas").child("salas");
         Query reservasSala =
-                mDatabase.equalTo(idRecurso).orderByChild("fecha_inicio/time");
-
+                mDatabaseQuery.orderByChild("idRecurso")
+                        .equalTo(idRecurso);/*.orderByChild("fecha_inicio/month").equalTo(mes).
+                        orderByChild("fecha_inicio/date").equalTo(diaMes)*/;
 
         reservasSala.addChildEventListener(new ChildEventListener() {
             @Override
@@ -138,30 +148,49 @@ public class Dia1 extends Fragment {
                 Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                 //Nueva reserva de sala agregada
                 Reserva reserva = dataSnapshot.getValue(Reserva.class);
-                horas.add(reserva);
-                // Actualizo el adapter con los nuevos cambios en la lista
-                adapterDiaHora.notifyDataSetChanged();
+                Calendar manejoFecha = Calendar.getInstance();
+                manejoFecha.setTime(reserva.getFecha_inicio());
+                if (fechaMisma(reserva.getFecha_inicio(), mParam2)) {
+                    int horaReserva = manejoFecha.get(Calendar.HOUR_OF_DAY);
+                    int iNuevo = getPosByHour(horaReserva);
+                    horas.set(iNuevo, reserva);
+                    // Actualizo el adapter con los nuevos cambios en la lista
+                    adapterDiaHora.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
-                // Sala modificada
-                Reserva reservaEditada =  dataSnapshot.getValue(Reserva.class);
-                int i = getPosicionReserva(reservaEditada);
-                horas.set(i, reservaEditada);
-                // Actualizo el adapter con los nuevos cambios en la lista
-                adapterDiaHora.notifyDataSetChanged();;
+                Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+                //Nueva reserva de sala agregada
+                Reserva reserva = dataSnapshot.getValue(Reserva.class);
+                Calendar manejoFecha = Calendar.getInstance();
+                manejoFecha.setTime(reserva.getFecha_inicio());
+                if (fechaMisma(reserva.getFecha_inicio(), mParam2)) {
+                    int horaReserva = manejoFecha.get(Calendar.HOUR_OF_DAY);
+                    int iNuevo = getPosByHour(horaReserva);
+                    horas.set(iNuevo, reserva);
+                    // Actualizo el adapter con los nuevos cambios en la lista
+                    adapterDiaHora.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
                 // Reserva eliminada
-                Reserva reservaEliminada =  dataSnapshot.getValue(Reserva.class);
-                horas.remove(reservaEliminada);
-                // Actualizo el adapter con los nuevos cambios en la lista
-                adapterDiaHora.notifyDataSetChanged();
+                Reserva reservaEliminada = dataSnapshot.getValue(Reserva.class);
+                Calendar manejoFecha = Calendar.getInstance();
+                manejoFecha.setTime(reservaEliminada.getFecha_inicio());
+                if (fechaMisma(reservaEliminada.getFecha_inicio(), mParam2)) {
+                    int horaReserva = manejoFecha.get(Calendar.HOUR_OF_DAY);
+                    int iNuevo = getPosByHour(horaReserva);
+                    //Se pone no disponible
+                    reservaEliminada.setActiva(false);
+                    // Actualizo el adapter con los nuevos cambios en la lista
+                    horas.set(iNuevo, reservaEliminada);
+                    adapterDiaHora.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -210,5 +239,55 @@ public class Dia1 extends Fragment {
         }
 
         adapterDiaHora.notifyDataSetChanged();
+    }
+
+    private int getPosByHour(int hora) {
+        int resultado = hora*7/22;
+        return resultado;
+    }
+
+    private boolean fechaMisma(Date fecha1, Date fecha2) {
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(fecha1);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(fecha2);
+        int ano1 = calendar1.get(Calendar.YEAR);
+        int mes1 = calendar1.get(Calendar.MONTH);
+        int dia1 = calendar1.get(Calendar.DAY_OF_MONTH);
+        int ano2 = calendar2.get(Calendar.YEAR);
+        int mes2 = calendar2.get(Calendar.MONTH);
+        int dia2 = calendar2.get(Calendar.DAY_OF_MONTH);
+        return ano1 == ano2 && mes1 == mes2 && dia1 == dia2;
+    }
+
+    private void eventoClickRow() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Reserva reservaSelect = horas.get(position);
+                DatabaseReference p1;
+                DatabaseReference p2;
+                if (reservaSelect.getActiva()) {
+                    Toast.makeText(getContext(), "El horario seleccionado no se encuentra disponible",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    reservaSelect.setActiva(true);
+                    reservaSelect.setIdUsuario(FirebaseAuth.getInstance().getUid());
+                    reservaSelect.setIdRecurso(mParam1.getId());
+                    reservaSelect.setRecurso("sala");
+                    p1 = mDatabase.child("proyecto").child("reservas").
+                            child("salas").push();
+                    reservaSelect.setIdReserva(p1.getKey().toString());
+                    p1.setValue(reservaSelect);
+                    Toast.makeText(getContext(), "Se ha realizado la reserva",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 }
