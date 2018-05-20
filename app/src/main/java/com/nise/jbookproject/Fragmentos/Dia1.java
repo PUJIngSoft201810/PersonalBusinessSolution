@@ -61,8 +61,6 @@ public class Dia1 extends Fragment {
 
     private TextView titulo;
 
-    // TODO: poner adapterHora
-
     public Dia1() {
         // Required empty public constructor
     }
@@ -123,24 +121,12 @@ public class Dia1 extends Fragment {
         String idRecurso = this.mParam1.getId();
         Calendar fechaPrimera = Calendar.getInstance();
         fechaPrimera.setTime(mParam2);
-        int año = fechaPrimera.get(Calendar.YEAR);
-        int mes = fechaPrimera.get(Calendar.MONTH);
-        int diaMes = fechaPrimera.get(Calendar.DAY_OF_MONTH);
-        /*fechaPrimera.set(Calendar.HOUR_OF_DAY,0);
-        fechaPrimera.set(Calendar.MINUTE,0);
-        fechaPrimera.set(Calendar.SECOND,0);
-        long milisFechaPrimera = fechaPrimera.getTimeInMillis();
-        fechaPrimera.set(Calendar.HOUR_OF_DAY, 23);
-        fechaPrimera.set(Calendar.MINUTE,59);
-        fechaPrimera.set(Calendar.SECOND,59);
-        fechaPrimera.get(Calendar.YEAR);*/
-        long milisFechaSegunda = fechaPrimera.getTimeInMillis();
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mDatabaseQuery = mDatabase.child("proyecto").child("reservas").child("salas");
         Query reservasSala =
                 mDatabaseQuery.orderByChild("idRecurso")
-                        .equalTo(idRecurso);/*.orderByChild("fecha_inicio/month").equalTo(mes).
-                        orderByChild("fecha_inicio/date").equalTo(diaMes)*/;
+                        .equalTo(idRecurso);
 
         reservasSala.addChildEventListener(new ChildEventListener() {
             @Override
@@ -206,20 +192,6 @@ public class Dia1 extends Fragment {
             }
         });
 
-    }
-
-    private int getPosicionReserva(Reserva reservaEditada) {
-        int i = 0;
-        int posicion = -1;
-        boolean sinEncontrar = true;
-        while (i < horas.size() && sinEncontrar) {
-            if (reservaEditada.getIdReserva().equals(horas.get(i).getIdReserva())) {
-                posicion = i;
-                sinEncontrar = false;
-            }
-            i++;
-        }
-        return posicion;
     }
 
     private void llenarLista() {
