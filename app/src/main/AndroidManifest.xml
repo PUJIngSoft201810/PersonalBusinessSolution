@@ -24,7 +24,11 @@
         <activity android:name=".Actividades.ReservarConsola" />
         <activity android:name=".Actividades.ReservarSala" />
         <activity android:name=".Actividades.ReservarTelevisor" />
-        <activity android:name=".Actividades.ConsultarReservasActivas"></activity>
+        <activity android:name=".Actividades.ConsultarReservasActivas" />
+        <activity
+            android:name=".Actividades.ReservarSalaDia"
+            android:label="@string/title_activity_reservar_sala_dia"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
