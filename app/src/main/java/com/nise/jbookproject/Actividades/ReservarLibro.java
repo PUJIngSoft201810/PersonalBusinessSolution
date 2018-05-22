@@ -18,14 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nise.jbookproject.Modulos.AdapterComputador;
 import com.nise.jbookproject.Modulos.AdapterLibro;
-import com.nise.jbookproject.Modulos.Computador;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
 import com.nise.jbookproject.Modulos.Libro;
 import com.nise.jbookproject.Modulos.RecyclerTouchListener;
 import com.nise.jbookproject.Modulos.Reserva;
-import com.nise.jbookproject.Modulos.TipoComputador;
 import com.nise.jbookproject.R;
 
 import java.util.ArrayList;

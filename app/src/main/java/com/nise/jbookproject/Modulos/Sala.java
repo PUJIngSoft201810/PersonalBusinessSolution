@@ -1,6 +1,8 @@
 package com.nise.jbookproject.Modulos;
 
-public class Sala extends Recurso {
+import java.io.Serializable;
+
+public class Sala extends Recurso implements Serializable{
     int capacidad;
 
     public int getCapacidad() {
@@ -11,13 +13,18 @@ public class Sala extends Recurso {
         this.capacidad = capacidad;
     }
 
-    public Sala(String id, String descripcion, boolean estado, String ubicacion, int capacidad) {
-        super(id, descripcion, estado, ubicacion);
+    public Sala(String id, String nombre, String descripcion, boolean estado, String ubicacion, int capacidad) {
+        super(id, nombre,descripcion, estado, ubicacion);
         this.capacidad = capacidad;
     }
 
-    public Sala(String id, String descripcion, boolean estado, String ubicacion) {
-        super(id, descripcion, estado, ubicacion);
+    public Sala(String id, String nombre, String descripcion, boolean estado, String ubicacion) {
+        super(id, nombre, descripcion, estado, ubicacion);
+    }
+
+    public Sala(){
+        //FireBase
+        super();
     }
 
     @Override

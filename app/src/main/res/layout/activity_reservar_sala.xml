@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutReservarSala"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Actividades.ReservarSala">
@@ -10,8 +11,29 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/buttonAddSala"
+        android:layout_alignBottom="@+id/buttonAddSala"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="155dp"
         android:text="Reservar Sala" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerSalas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/buttonAddSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/recyclerSalas"
+        android:layout_alignParentTop="true"
+        android:onClick="addSala"
+        android:text="Add Sala" />
 </RelativeLayout>
