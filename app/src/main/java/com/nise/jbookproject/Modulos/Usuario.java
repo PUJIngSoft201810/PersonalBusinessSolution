@@ -4,27 +4,11 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable{
     private String idU;
-    String idref;
+    private String idref;
     private String email;
     private String nombre;
     private String apellido;
     private String identificacion;
-
-    public String getIdref() {
-        return idref;
-    }
-
-    public void setidref(String idFireUsr) {
-        this.idref = idFireUsr;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Usuario(String id, String email, String nombre, String apellido, String identificacion) {
         this.idU = id;
@@ -37,20 +21,36 @@ public class Usuario implements Serializable{
 
     }
 
+    public String getIdU() {
+        return idU;
+    }
+
+    public void setIdU(String idU) {
+        this.idU = idU;
+    }
+
+    public String getIdref() {
+        return idref;
+    }
+
+    public void setIdref(String idref) {
+        this.idref = idref;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getId() {
-        return idU;
-    }
-
-    public void setId(String id) {
-        this.idU = id;
     }
 
     public String getApellido() {

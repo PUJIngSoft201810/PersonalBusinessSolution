@@ -54,17 +54,37 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     }
     private void registrar() {
         if(validateForm()){
-            String email = editTextEmail.getText().toString();
+            final String email = editTextEmail.getText().toString();
             String password = editTextPass.getText().toString();
-            String name = editTextName.getText().toString();
-            String lastName = editTextLastName.getText().toString();
-            String identificacion=editTextIdent.getText().toString();
+            final String name = editTextName.getText().toString();
+            final String lastName = editTextLastName.getText().toString();
+            final String identificacion=editTextIdent.getText().toString();
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.d("SESION","signInWithEmail:onComplete:" + task.isSuccessful());
                     if(task.isSuccessful()){
                         Log.i("SESION", "usuario creado correctamente");
+                        String tipoAcad= String.valueOf(spinnAcad.getSelectedItem());
+
+                        final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
+                        final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
+                        final DatabaseReference academicoRef = usuarioRef.child(FirebaseReferences.ACADEMICO_REFERENCE);
+
+                        String idUser = mAuth.getUid();
+
+                        Eacademico estadoAcad=Eacademico.ESTUDIANTE;
+                        if(tipoAcad.equals("Estudiante"))
+                            estadoAcad=Eacademico.ESTUDIANTE;
+                        else if(tipoAcad.equals("Profesor"))
+                            estadoAcad=Eacademico.PROFESOR;
+                        Academico us =new Academico(idUser, email, name, lastName, identificacion, estadoAcad);
+                        DatabaseReference miUsuario = academicoRef.push();
+                        us.setIdref(miUsuario.getKey().toString());
+                        miUsuario.setValue(us);
+
+                        Log.i("USER ","academico in if"+" usID  "+us.getIdU());
+
                     }
                     else{
                         Log.w("SESION","signInWithEmail:failed", task.getException());
@@ -77,26 +97,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                     }
                 }
             });
-            String tipoAcad= String.valueOf(spinnAcad.getSelectedItem());
 
-            final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
-            final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
-            final DatabaseReference academicoRef = usuarioRef.child(FirebaseReferences.ACADEMICO_REFERENCE);
-
-            String idUser = mAuth.getUid();
-
-                Eacademico estadoAcad=Eacademico.ESTUDIANTE;
-                if(tipoAcad.equals("Estudiante"))
-                    estadoAcad=Eacademico.ESTUDIANTE;
-                else if(tipoAcad.equals("Profesor"))
-                    estadoAcad=Eacademico.PROFESOR;
-                else if(tipoAcad.equals("Empleado"))
-                    estadoAcad=Eacademico.EMPLEADO;
-                Academico us =new Academico(idUser, email, name, lastName, identificacion, estadoAcad);
-                DatabaseReference miUsuario = academicoRef.push();
-                us.setidref(miUsuario.getKey().toString());
-                miUsuario.setValue(us);
-                Log.i("USER ","academico in if");
 
         }
     }
@@ -149,6 +150,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         {
             case R.id.register:
                 registrar();
+
                 startActivity(new Intent(Registro.this, MenuUser.class));
                 break;
         }

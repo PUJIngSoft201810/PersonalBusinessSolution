@@ -3,6 +3,7 @@ package com.nise.jbookproject.Actividades;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nise.jbookproject.Modulos.Administrador;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
+import com.nise.jbookproject.Modulos.Reserva;
 import com.nise.jbookproject.R;
+
+import java.util.Calendar;
 
 
 public class MenuUser extends AppCompatActivity implements View.OnClickListener {
@@ -38,10 +42,10 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonCerrar = (Button) findViewById(R.id.cerrarButton);
         buttonRegistrar =(Button) findViewById(R.id.registrarButton) ;
         buttonConsulta.setOnClickListener(this);
-        if (isAdmin())
-            buttonRegistrar.setActivated(true);
-        else
-            buttonRegistrar.setActivated(false);
+        isAdmin();
+        System.out.println("**************is aDmin ");
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
@@ -81,39 +85,26 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    private boolean isAdmin() {
+    private void isAdmin() {
 
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
         final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
         final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
-        final String idUser = mAuth.getUid();
-        final boolean[] isAdmin = {false};
-        Query ELAdmin =
-                adminRef.orderByChild("idRef");
 
-// Attach a listener to read the data at our posts reference
-        ELAdmin.addValueEventListener(new ValueEventListener() {
+        final String idUser = mAuth.getUid();
+            DatabaseReference adminIDRef = adminRef.child(idUser);
+        ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int cont=0;
-                for (DataSnapshot snap:dataSnapshot.getChildren()){
-                    Administrador adm = dataSnapshot.getValue(Administrador.class);
-                    System.out.println(adm.toString());
-                 /*   if(adm.getIdref().equals(null)||adm.getId().equals(idUser)){
-                        isAdmin[0] |=true;
-                    }*/
-                    cont++;
-                }
-                if(cont==0)
-                    isAdmin[0] =true;
+                if(dataSnapshot.exists()) buttonRegistrar.setVisibility(View.VISIBLE);
+                else  buttonRegistrar.setVisibility(View.VISIBLE);
+
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-        return isAdmin[0];
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        adminIDRef.addListenerForSingleValueEvent(eventListener);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

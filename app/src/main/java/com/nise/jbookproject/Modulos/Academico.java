@@ -20,7 +20,6 @@ public class Academico extends Usuario {
     public String toString() {
         return "Academico{" +
                 "Estado=" + Estado +
-                ", idref='" + idref + '\'' +
                 '}';
     }
 }

@@ -5,11 +5,8 @@ public class Funcionario extends Usuario {
         super(id, email, nombre, apellido, identificacion);
     }
 
-
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "idref='" + idref + '\'' +
-                '}';
+        return "Funcionario{}";
     }
 }
