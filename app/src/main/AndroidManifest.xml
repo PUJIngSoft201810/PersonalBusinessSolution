@@ -32,7 +32,8 @@
         <activity
             android:name=".Actividades.HistorialReservasT"
             android:label="@string/title_activity_historial_reservas_t" />
-        <activity android:name=".Actividades.Registro"></activity>
+        <activity android:name=".Actividades.Registro" />
+        <activity android:name=".Actividades.RegistroAdm"></activity>
     </application>
 
 </manifest>

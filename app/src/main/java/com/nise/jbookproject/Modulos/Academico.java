@@ -1,11 +1,11 @@
 package com.nise.jbookproject.Modulos;
 
 public class Academico extends Usuario {
-    Eacademico Estado;
+    private   Eacademico Estado;
 
-    public Academico(String id, String email, String nombre, String apellido, String identificacion, Eacademico estado) {
+    public Academico(String id, String email, String nombre, String apellido, String identificacion, Eacademico estadoAcad) {
         super(id, email, nombre, apellido, identificacion);
-        Estado = estado;
+        Estado = estadoAcad;
     }
 
     public Eacademico getEstado() {
@@ -20,7 +20,7 @@ public class Academico extends Usuario {
     public String toString() {
         return "Academico{" +
                 "Estado=" + Estado +
-                ", id='" + id + '\'' +
+                ", idref='" + idref + '\'' +
                 '}';
     }
 }

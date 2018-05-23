@@ -3,19 +3,19 @@ package com.nise.jbookproject.Modulos;
 import java.io.Serializable;
 
 public class Usuario implements Serializable{
-    String id;
-    String idFireUsr;
+    private String idU;
+    String idref;
     private String email;
     private String nombre;
     private String apellido;
     private String identificacion;
 
-    public String getIdFireUsr() {
-        return idFireUsr;
+    public String getIdref() {
+        return idref;
     }
 
-    public void setIdFireUsr(String idFireUsr) {
-        this.idFireUsr = idFireUsr;
+    public void setidref(String idFireUsr) {
+        this.idref = idFireUsr;
     }
 
     public String getEmail() {
@@ -27,7 +27,7 @@ public class Usuario implements Serializable{
     }
 
     public Usuario(String id, String email, String nombre, String apellido, String identificacion) {
-        this.id = id;
+        this.idU = id;
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -43,11 +43,11 @@ public class Usuario implements Serializable{
     }
 
     public String getId() {
-        return id;
+        return idU;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idU = id;
     }
 
     public String getApellido() {
@@ -69,7 +69,7 @@ public class Usuario implements Serializable{
     @Override
     public String toString() {
         return "Usuario{" +
-                "id='" + id + '\'' +
+                "id='" + idU + '\'' +
                 ", email='" + email + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

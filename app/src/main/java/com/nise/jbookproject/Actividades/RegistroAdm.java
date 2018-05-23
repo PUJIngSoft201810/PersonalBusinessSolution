@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,22 +23,20 @@ import com.nise.jbookproject.Modulos.Administrador;
 import com.nise.jbookproject.Modulos.Eacademico;
 import com.nise.jbookproject.Modulos.FirebaseReferences;
 import com.nise.jbookproject.Modulos.Funcionario;
-import com.nise.jbookproject.Modulos.Reserva;
-import com.nise.jbookproject.Modulos.Usuario;
 import com.nise.jbookproject.R;
 
-public class Registro extends AppCompatActivity implements View.OnClickListener {
-    Button  buttonRegister;
+public class RegistroAdm extends AppCompatActivity implements View.OnClickListener{
+    Button buttonRegister;
     EditText editTextEmail, editTextPass, editTextName, editTextLastName,editTextIdent;
-    Spinner spinnAcad;
+    Spinner spinnType;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_registro_adm);
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-       database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         buttonRegister = (Button) findViewById(R.id.register);
         editTextEmail = (EditText) findViewById(R.id.email);
@@ -47,7 +44,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         editTextName = (EditText) findViewById(R.id.name);
         editTextLastName = (EditText) findViewById(R.id.LastName);
         editTextIdent=(EditText) findViewById(R.id.ident);
-        spinnAcad=(Spinner) findViewById(R.id.SpinnerAcad) ;
+        spinnType=(Spinner) findViewById(R.id.SpinnerType) ;
         buttonRegister.setOnClickListener(this);
 
 
@@ -59,9 +56,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             String name = editTextName.getText().toString();
             String lastName = editTextLastName.getText().toString();
             String identificacion=editTextIdent.getText().toString();
-
-
-
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -71,36 +65,39 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                     }
                     else{
                         Log.w("SESION","signInWithEmail:failed", task.getException());
-                        Toast.makeText(Registro.this,"Fallo: Usuario existente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistroAdm.this,"Fallo: Usuario existente", Toast.LENGTH_SHORT).show();
                         editTextEmail.setText("");
                         editTextPass.setText("");
+                        editTextName.setText("");
+                        editTextLastName.setText("");
+                        editTextIdent.setText("");
                     }
                 }
             });
-            String tipoAcad= String.valueOf(spinnAcad.getSelectedItem());
+            String tipo= String.valueOf(spinnType.getSelectedItem());
 
             final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
             final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
-            final DatabaseReference academicoRef = usuarioRef.child(FirebaseReferences.ACADEMICO_REFERENCE);
-
+            final DatabaseReference funcionarioRef = usuarioRef.child(FirebaseReferences.FUNCIONARIO_REFERENCE);
+            final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
             String idUser = mAuth.getUid();
 
-                Eacademico estadoAcad=Eacademico.ESTUDIANTE;
-                if(tipoAcad.equals("Estudiante"))
-                    estadoAcad=Eacademico.ESTUDIANTE;
-                else if(tipoAcad.equals("Profesor"))
-                    estadoAcad=Eacademico.PROFESOR;
-                else if(tipoAcad.equals("Empleado"))
-                    estadoAcad=Eacademico.EMPLEADO;
-                Academico us =new Academico(idUser, email, name, lastName, identificacion, estadoAcad);
-                DatabaseReference miUsuario = academicoRef.push();
-                us.setidref(miUsuario.getKey().toString());
-                miUsuario.setValue(us);
-                Log.i("USER ","academico in if");
+            if(tipo.equals("Funcionario")){
 
+                Funcionario fun= new Funcionario(idUser,email,name,lastName,identificacion);
+                DatabaseReference miUsuario = funcionarioRef.push();
+                fun.setidref(miUsuario.getKey().toString());
+                miUsuario.setValue(fun);
+                Log.i("USER ","funcionar in if");
+            }else if(tipo.equals("Administrador")){
+                Administrador adm= new Administrador(idUser,email,name,lastName,identificacion);
+                DatabaseReference miUsuario = adminRef.push();
+                adm.setidref(miUsuario.getKey().toString());
+                miUsuario.setValue(adm);
+                Log.i("USER ","admin in if");
+            }
         }
     }
-
     private boolean validateForm() {
         boolean valid = true;
         String email = editTextEmail.getText().toString();
@@ -141,15 +138,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
         return valid;
     }
-
-
     public void onClick(View view)
     {
         switch (view.getId())
         {
             case R.id.register:
                 registrar();
-                startActivity(new Intent(Registro.this, MenuUser.class));
+                startActivity(new Intent(RegistroAdm.this, MenuUser.class));
                 break;
         }
     }
@@ -159,7 +154,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         super.onStart();
 
     }
-
-
 }
+
+
+
 
