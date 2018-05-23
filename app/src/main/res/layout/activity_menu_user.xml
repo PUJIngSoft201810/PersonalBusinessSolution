@@ -20,26 +20,43 @@
         android:id="@+id/reservaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/cerrarButton"
         android:layout_alignTop="@+id/consultaButton"
-        android:layout_marginEnd="84dp"
         android:text="reservar" />
 
     <Button
         android:id="@+id/regresarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/consultaButton"
-        android:layout_marginBottom="218dp"
+        android:layout_marginTop="260dp"
         android:text="Regresar" />
 
     <Button
         android:id="@+id/cerrarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/reservaButton"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/regresarButton"
-        android:text="Button" />
+        android:layout_marginEnd="55dp"
+        android:text="cerrar sesion" />
+
+    <Button
+        android:id="@+id/noticiasButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/consultaButton"
+        android:layout_marginBottom="250dp"
+        android:text="Noticias" />
+
+    <Button
+        android:id="@+id/reglasButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/reservaButton"
+        android:layout_alignTop="@+id/noticiasButton"
+        android:text="reglas" />
 
 </RelativeLayout>

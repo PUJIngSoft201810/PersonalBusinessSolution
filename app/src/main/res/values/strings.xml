@@ -21,4 +21,32 @@
     <string name="action_search">Search</string>
     <string name="search_hint">Type name…</string>
     <string name="title_activity_historial_reservas_t">HistorialReservasT</string>
+    <string name="title_activity_crear_recurso">CrearRecurso</string>
+    <string name="noticias_text">
+        "Horario 24/7 Biblioteca General para examenes finales.\n\n"
+
+        "A partir del lunes 14 de mayo y hasta el sábado 2 de junio la Biblioteca General ampliará su habitual horario 24 horas a los fines de semana y festivos con el fin de posibilitar que todos los javerianos puedan sacar el mejor provecho de los recursos y servicios que se ofrecen para la preparación de sus exámenes finales.\n\n"
+        "Todos los recursos físicos y electrónicos de la Biblioteca General, así como salas y espacios para estudio individual y grupal de los diferentes pisos estarán disponibles para toda la comunidad javeriana las 24 horas en servicio ininterrumpido, incluidos sábados, domingos y festivos, desde el 14 de mayo hasta el sábado 2 de junio, con el fin de atender las necesidades de los usuarios en el marco de la preparación de exámenes finales.\n\n"
+        "Para utilizar equipos de escritorio los usuarios podrán solicitarlos en los puntos de información de cada piso. Para solicitar equipos portátiles deberán acercarse a las ventanillas del sótano 1 y el piso 0.\n"
+        "La reserva de salas grupales debe realizarse mínimo 24 horas antes del requerimiento al correo salasbiblioteca@javeriana.edu.co\n\n"
+        "Para consultar la colección física los usuarios pueden ingresar al Catálogo Biblos, y para acceder a las Bases de Datos el ingreso debe realizarse a través de http://www.javeriana.edu.co/biblos/bases-de-datos con usuario y contraseña javeriano.\n\n"
+        "Importante: Con motivo de las elecciones presidenciales la Biblioteca General no prestará servicio el domingo 27 de mayo. Por lo tanto, la Biblioteca General cerrará el sábado 26 de mayo a las 7:00 p.m. y retomará el servicio el lunes 28 de mayo a las 6:00 a.m..\n\n"
+
+    </string>
+    <string name="reglas_text">
+        "\t BIBLIOTECA GENERAL ALFONSO BORRERO CABAL, S.J.\n\n"
+        "Carrera 7 # 41 - 00 320 8320 ext. 2132, 2135 biblioteca@javeriana.edu.co \n\n"
+        "Horario atención comunidad javeriana: 24 horas continuas: Desde el lunes 6:00 a.m. hasta el sábado 7:00 p.m. Domingos y fest.: 10:00 a.m. a 4:00 p.m.\n\n"
+        "Horario atención usuarios externos: Lunes a viernes 8:00 a.m. a 9:00 p.m. Sábado 8:00 a.m. a 5:00 p.m.\n\n"
+        "\t HORARIOS SALAS DE ESTUDIO BIBLIOTECA GENERAL\n\n"
+        "Pisos 5, 2, 1 y 0. Atención 24 horas continuas desde lunes 6:00 a.m. hasta sábado 7:00 p.m.\n\n"
+        "Pisos 4, 3 y sótano 2. Lun. a vier: 6:00 a.m. a 11:00 p.m. Sab: 7:00 a.m. a 7:00 p.m.\n\n"
+        "Sótano 1. Lun. a vier: 6:00 a.m. a 10:00 p.m. Sab: 7:00 a.m. a 7:00 p.m.\n\n"
+        "Sala Música. Lun. a vier: 7:00 a.m. a 10:00 p.m. Sab: 8:00 a.m. a 4:00 p.m. \n"
+        "Sala libros valiosos (piso 2). Lun. a vier: 8:00 a 5:00 p.m. "
+
+    </string>
+    <string name="title_activity_crear_usuario">CrearUsuario</string>
+    <string name="title_activity_reglas">Reglas</string>
+    <string name="title_activity_noticias">Noticias</string>
 </resources>

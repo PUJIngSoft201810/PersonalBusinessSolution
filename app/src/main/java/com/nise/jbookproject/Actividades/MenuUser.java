@@ -16,7 +16,7 @@ import com.nise.jbookproject.R;
 
 
 public class MenuUser extends AppCompatActivity implements View.OnClickListener {
-    Button buttonConsulta, buttonReserva, buttonRegresar, buttonCerrar;
+    Button buttonConsulta, buttonReserva, buttonRegresar, buttonCerrar, buttonNoticias, buttonReglas;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -31,6 +31,9 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonReserva = (Button) findViewById(R.id.reservaButton);
         buttonRegresar = (Button) findViewById(R.id.regresarButton);
         buttonCerrar = (Button) findViewById(R.id.cerrarButton);
+        buttonNoticias = (Button) findViewById(R.id.noticiasButton);
+        buttonReglas = (Button) findViewById(R.id.reglasButton);
+
         buttonConsulta.setOnClickListener(this);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -53,6 +56,19 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(MenuUser.this, ConsultarReservasActivas.class));
             }
         });
+        buttonNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuUser.this, Noticias.class));
+            }
+        });
+        buttonReglas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuUser.this, Reglas.class));
+            }
+        });
+
         buttonCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

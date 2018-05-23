@@ -31,7 +31,24 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Actividades.HistorialReservasT"
-            android:label="@string/title_activity_historial_reservas_t"></activity>
+            android:label="@string/title_activity_historial_reservas_t" />
+        <activity android:name=".Actividades.MenuAdmin" />
+        <activity
+            android:name=".Actividades.CrearRecurso"
+            android:label="@string/title_activity_crear_recurso"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Actividades.CrearUsuario"
+            android:label="@string/title_activity_crear_usuario"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Actividades.Reglas"
+            android:label="@string/title_activity_reglas"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Actividades.Noticias"
+            android:label="@string/title_activity_noticias"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

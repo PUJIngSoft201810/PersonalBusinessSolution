@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextEmail, editTextPass;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private boolean esAdmin = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     // User is signed in
                     Log.d("SESION", "onAuthStateChanged:signed_in:" + user.getEmail());
-                    startActivity(new Intent(MainActivity.this, MenuUser.class));
+                    if(esAdmin)
+                    {
+                        startActivity(new Intent(MainActivity.this, MenuAdmin.class));
+                    }
+                    else
+                    {
+                        startActivity(new Intent(MainActivity.this, MenuUser.class));
+                    }
                     //Log.i("SESION","sesion iniciada con email: "+user.getEmail());
                 }
                 else
