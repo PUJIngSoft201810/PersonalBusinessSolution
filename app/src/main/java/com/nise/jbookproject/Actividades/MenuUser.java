@@ -44,7 +44,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuUser.this, HistorialReservasT.class));
+                startActivity(new Intent(MenuUser.this, HistorialReservas.class));
             }
         });
         buttonRegresar.setOnClickListener(new View.OnClickListener() {

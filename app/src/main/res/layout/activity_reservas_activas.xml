@@ -9,7 +9,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerComp"
         android:layout_width="match_parent"
-        android:layout_height="142dp"
+        android:layout_height="96dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewComputador"
         android:scrollbars="vertical" />
@@ -17,7 +17,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerLib"
         android:layout_width="match_parent"
-        android:layout_height="143dp"
+        android:layout_height="92dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewLibros"
         android:scrollbars="vertical" />
@@ -50,7 +50,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerCons"
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="97dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewConsolas" />
 
@@ -65,8 +65,23 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerTel"
         android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_height="119dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewTelevisor" />
+
+    <TextView
+        android:id="@+id/textViewSalas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewLibros"
+        android:layout_below="@+id/recyclerTel"
+        android:text="Salas" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerSal"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewSalas" />
 
 </RelativeLayout>

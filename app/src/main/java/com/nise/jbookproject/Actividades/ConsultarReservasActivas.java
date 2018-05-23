@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,19 +32,27 @@ import java.util.Map;
 
 public class ConsultarReservasActivas extends AppCompatActivity {
 
-    RecyclerView rvComp, rvLib, rvCons, rvTel;
-    List<Reserva> reservasComp, reservasLib, reservasCons, reservasTel;
+    RecyclerView rvComp, rvLib, rvCons, rvTel, rvSal;
+    List<Reserva> reservasComp, reservasLib, reservasCons, reservasTel, reservasSal;
 
-    AdapterHistorialReservas adapterComp, adapterLib, adapterCons, adapterTel;
+    AdapterHistorialReservas adapterComp, adapterLib, adapterCons, adapterTel, adapterSal;
+
+    private FirebaseAuth mAuth;
+    private boolean esFuncionario = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservas_activas);
 
+        mAuth = FirebaseAuth.getInstance();
+        //TODO COMPROBAR QUE EL USUARIO SEA FUNCIONARIO O ACADEMICO
+
         rvComp = (RecyclerView) findViewById(R.id.recyclerComp);
         rvLib = (RecyclerView) findViewById(R.id.recyclerLib);
         rvCons = (RecyclerView) findViewById(R.id.recyclerCons);
         rvTel = (RecyclerView) findViewById(R.id.recyclerTel);
+        rvSal = (RecyclerView) findViewById(R.id.recyclerSal);
         //rv.setHasFixedSize(true);
         rvComp.setLayoutManager(new LinearLayoutManager(this));
         rvComp.setItemAnimator(new DefaultItemAnimator());
@@ -61,10 +70,15 @@ public class ConsultarReservasActivas extends AppCompatActivity {
         rvTel.setItemAnimator(new DefaultItemAnimator());
         rvTel.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
 
+        rvSal.setLayoutManager(new LinearLayoutManager(this));
+        rvSal.setItemAnimator(new DefaultItemAnimator());
+        rvSal.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+
         reservasComp = new ArrayList<>();
         reservasLib = new ArrayList<>();
         reservasCons = new ArrayList<>();
         reservasTel = new ArrayList<>();
+        reservasSal = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -72,12 +86,14 @@ public class ConsultarReservasActivas extends AppCompatActivity {
         adapterLib = new AdapterHistorialReservas(reservasLib);
         adapterCons = new AdapterHistorialReservas(reservasCons);
         adapterTel = new AdapterHistorialReservas(reservasTel);
+        adapterSal = new AdapterHistorialReservas(reservasSal);
 
 
         rvComp.setAdapter(adapterComp);
         rvLib.setAdapter(adapterLib);
         rvCons.setAdapter(adapterCons);
         rvTel.setAdapter(adapterTel);
+        rvSal.setAdapter(adapterSal);
 
         Log.i("ADAPTER", "Adapter creado");
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
@@ -89,8 +105,10 @@ public class ConsultarReservasActivas extends AppCompatActivity {
         final DatabaseReference librosRecRef = recursosRef.child(FirebaseReferences.LIBROS_REFERENCE);
         final DatabaseReference consolasResRef = reservasRef.child(FirebaseReferences.CONSOLAS_REFERENCE);
         final DatabaseReference consolasRecRef = recursosRef.child(FirebaseReferences.CONSOLAS_REFERENCE);
-         final DatabaseReference televisoresResRef = reservasRef.child(FirebaseReferences.TELEVISORES_REFERENCE);
+        final DatabaseReference televisoresResRef = reservasRef.child(FirebaseReferences.TELEVISORES_REFERENCE);
         final DatabaseReference televisoresRecRef = recursosRef.child(FirebaseReferences.TELEVISORES_REFERENCE);
+        final DatabaseReference salasResRef = reservasRef.child(FirebaseReferences.SALAS_REFERENCE);
+        final DatabaseReference salasRecRef = recursosRef.child(FirebaseReferences.SALAS_REFERENCE);
 
         Log.i("ADAPTER", "Parent "+ reservasRef.toString());
 
@@ -217,6 +235,37 @@ public class ConsultarReservasActivas extends AppCompatActivity {
             }
         }));
 
+        rvSal.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), rvSal, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Reserva reserva = reservasSal.get(position);
+                reserva.setActiva(false);
+                DatabaseReference miRecurso = salasRecRef.child(reserva.getIdRecurso());
+                Map<String, Object> hopperUpdatesRecu = new HashMap<>();
+                hopperUpdatesRecu.put("reservado", false);
+                miRecurso.updateChildren(hopperUpdatesRecu);
+
+                DatabaseReference miReserva = salasResRef.child(reserva.getIdReserva());
+                Map<String, Object> hopperUpdatesRes = new HashMap<>();
+                hopperUpdatesRes.put("activa", false);
+                miReserva.updateChildren(hopperUpdatesRes);
+
+                /*Date fecha_fin = Calendar.getInstance().getTime();
+                Map<String, Object> hopperUpdatesR = new HashMap<>();
+                hopperUpdatesR.put("fecha_fin", fecha_fin);
+                miReserva.updateChildren(hopperUpdatesR);
+                */
+
+                Toast.makeText(getApplicationContext(), reserva.getIdReserva() + " recurso regresado", Toast.LENGTH_SHORT).show();
+                adapterTel.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
         computadoresResRef.addValueEventListener(new ValueEventListener() {
             @Override
 
@@ -232,8 +281,21 @@ public class ConsultarReservasActivas extends AppCompatActivity {
                     Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
                     if(reserva.getActiva())
                     {
-                        reservasComp.add(reserva);
-                        i++;
+                        if(esFuncionario)
+                        {
+                            Log.i("RESERVAS", "Entro " + i);
+                            reservasComp.add(reserva);
+                            i++;
+                        }
+                        else
+                        {
+                            if(reserva.getIdUsuario().compareTo(mAuth.getUid()) == 0)
+                            {
+                                Log.i("RESERVAS", "Entro " + i);
+                                reservasComp.add(reserva);
+                                i++;
+                            }
+                        }
                     }
                 }
                 adapterComp.notifyDataSetChanged();
@@ -260,8 +322,21 @@ public class ConsultarReservasActivas extends AppCompatActivity {
                     Reserva reserva = snapshot.getValue(Reserva.class);
                     if(reserva.getActiva())
                     {
-                        reservasLib.add(reserva);
-                        i++;
+                        if(esFuncionario)
+                        {
+                            Log.i("RESERVAS", "Entro " + i);
+                            reservasLib.add(reserva);
+                            i++;
+                        }
+                        else
+                        {
+                            if(reserva.getIdUsuario().compareTo(mAuth.getUid()) == 0)
+                            {
+                                Log.i("RESERVAS", "Entro " + i);
+                                reservasLib.add(reserva);
+                                i++;
+                            }
+                        }
                     }
                     Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
                 }
@@ -289,8 +364,21 @@ public class ConsultarReservasActivas extends AppCompatActivity {
                     Reserva reserva = snapshot.getValue(Reserva.class);
                     if(reserva.getActiva())
                     {
-                        reservasCons.add(reserva);
-                        i++;
+                        if(esFuncionario)
+                        {
+                            Log.i("RESERVAS", "Entro " + i);
+                            reservasCons.add(reserva);
+                            i++;
+                        }
+                        else
+                        {
+                            if(reserva.getIdUsuario().compareTo(mAuth.getUid()) == 0)
+                            {
+                                Log.i("RESERVAS", "Entro " + i);
+                                reservasCons.add(reserva);
+                                i++;
+                            }
+                        }
                     }
                     Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
                 }
@@ -318,12 +406,67 @@ public class ConsultarReservasActivas extends AppCompatActivity {
                     Reserva reserva = snapshot.getValue(Reserva.class);
                     if(reserva.getActiva())
                     {
-                        reservasTel.add(reserva);
-                        i++;
+                        if(esFuncionario)
+                        {
+                            Log.i("RESERVAS", "Entro " + i);
+                            reservasTel.add(reserva);
+                            i++;
+                        }
+                        else
+                        {
+                            if(reserva.getIdUsuario().compareTo(mAuth.getUid()) == 0)
+                            {
+                                Log.i("RESERVAS", "Entro " + i);
+                                reservasTel.add(reserva);
+                                i++;
+                            }
+                        }
                     }
                     Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
                 }
                 adapterTel.notifyDataSetChanged();
+                Log.i("ADAPTER", "Se agregaron las reservas y se notifico" + i);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        salasResRef.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("ADAPTER", "DataSnapshot"+dataSnapshot.toString());
+                reservasSal.removeAll(reservasSal);
+                Log.i("ADAPTER", "Se removieron las reservas");
+                int i = 0;
+                for (DataSnapshot snapshot:
+                        dataSnapshot.getChildren()
+                        ) {
+                    Reserva reserva = snapshot.getValue(Reserva.class);
+                    if(reserva.getActiva())
+                    {
+                        if(esFuncionario)
+                        {
+                            Log.i("RESERVAS", "Entro " + i);
+                            reservasSal.add(reserva);
+                            i++;
+                        }
+                        else
+                        {
+                            if(reserva.getIdUsuario().compareTo(mAuth.getUid()) == 0)
+                            {
+                                Log.i("RESERVAS", "Entro " + i);
+                                reservasSal.add(reserva);
+                                i++;
+                            }
+                        }
+                    }
+                    Log.i("ADAPTER","Reserva"+ reserva.getRecurso());
+                }
+                adapterSal.notifyDataSetChanged();
                 Log.i("ADAPTER", "Se agregaron las reservas y se notifico" + i);
             }
 
