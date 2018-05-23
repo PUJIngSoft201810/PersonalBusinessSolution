@@ -85,13 +85,13 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
             if(tipo.equals("Funcionario")){
 
                 Funcionario fun= new Funcionario(idUser,email,name,lastName,identificacion);
-                DatabaseReference miUsuario = funcionarioRef.push();
+                DatabaseReference miUsuario = funcionarioRef.child(idUser);
                 fun.setIdref(miUsuario.getKey().toString());
                 miUsuario.setValue(fun);
                 Log.i("USER ","funcionario in if");
             }else if(tipo.equals("Administrador")){
                 Administrador adm= new Administrador(idUser,email,name,lastName,identificacion);
-                DatabaseReference miUsuario = adminRef.push();
+                DatabaseReference miUsuario = adminRef.child(idUser);
                 adm.setIdref(miUsuario.getKey().toString());
                 miUsuario.setValue(adm);
                 Log.i("USER ","admin in if");
@@ -114,26 +114,26 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
         } else {
             editTextPass.setError(null);
         }
-        String name = editTextPass.getText().toString();
+        String name = editTextName.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            editTextPass.setError("Required.");
+            editTextName.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextName.setError(null);
         }
-        String lastName = editTextPass.getText().toString();
+        String lastName = editTextLastName.getText().toString();
         if (TextUtils.isEmpty(lastName)) {
-            editTextPass.setError("Required.");
+            editTextLastName.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextLastName.setError(null);
         }
-        String identificacion = editTextPass.getText().toString();
+        String identificacion = editTextIdent.getText().toString();
         if (TextUtils.isEmpty(identificacion)) {
-            editTextPass.setError("Required.");
+            editTextIdent.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextIdent.setError(null);
         }
 
         return valid;

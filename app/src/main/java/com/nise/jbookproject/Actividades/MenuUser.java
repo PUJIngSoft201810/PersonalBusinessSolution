@@ -43,7 +43,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonRegistrar =(Button) findViewById(R.id.registrarButton) ;
         buttonConsulta.setOnClickListener(this);
         isAdmin();
-        System.out.println("**************is aDmin ");
+
 
 
 
@@ -92,19 +92,14 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
 
         final String idUser = mAuth.getUid();
+        try {
             DatabaseReference adminIDRef = adminRef.child(idUser);
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) buttonRegistrar.setVisibility(View.VISIBLE);
-                else  buttonRegistrar.setVisibility(View.VISIBLE);
+            System.out.println("**************database is "+adminIDRef.getDatabase());
+            buttonRegistrar.setVisibility(View.VISIBLE);
+        }catch (Exception e){
+            System.out.println("**************is not  aDmin ");
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-        adminIDRef.addListenerForSingleValueEvent(eventListener);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

@@ -79,8 +79,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                         else if(tipoAcad.equals("Profesor"))
                             estadoAcad=Eacademico.PROFESOR;
                         Academico us =new Academico(idUser, email, name, lastName, identificacion, estadoAcad);
-                        DatabaseReference miUsuario = academicoRef.push();
-                        us.setIdref(miUsuario.getKey().toString());
+                        DatabaseReference miUsuario = academicoRef.child(idUser);
+                        us.setIdref(null);
                         miUsuario.setValue(us);
 
                         Log.i("USER ","academico in if"+" usID  "+us.getIdU());
@@ -118,31 +118,30 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         } else {
             editTextPass.setError(null);
         }
-        String name = editTextPass.getText().toString();
+        String name = editTextName.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            editTextPass.setError("Required.");
+            editTextName.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextName.setError(null);
         }
-        String lastName = editTextPass.getText().toString();
+        String lastName = editTextLastName.getText().toString();
         if (TextUtils.isEmpty(lastName)) {
-            editTextPass.setError("Required.");
+            editTextLastName.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextLastName.setError(null);
         }
-        String identificacion = editTextPass.getText().toString();
+        String identificacion = editTextIdent.getText().toString();
         if (TextUtils.isEmpty(identificacion)) {
-            editTextPass.setError("Required.");
+            editTextIdent.setError("Required.");
             valid = false;
         } else {
-            editTextPass.setError(null);
+            editTextIdent.setError(null);
         }
 
         return valid;
     }
-
 
     public void onClick(View view)
     {
