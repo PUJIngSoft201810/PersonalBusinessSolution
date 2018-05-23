@@ -88,7 +88,7 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
                 DatabaseReference miUsuario = funcionarioRef.push();
                 fun.setidref(miUsuario.getKey().toString());
                 miUsuario.setValue(fun);
-                Log.i("USER ","funcionar in if");
+                Log.i("USER ","funcionario in if");
             }else if(tipo.equals("Administrador")){
                 Administrador adm= new Administrador(idUser,email,name,lastName,identificacion);
                 DatabaseReference miUsuario = adminRef.push();

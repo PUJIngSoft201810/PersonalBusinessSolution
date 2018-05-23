@@ -5,7 +5,7 @@ public class Academico extends Usuario {
 
     public Academico(String id, String email, String nombre, String apellido, String identificacion, Eacademico estadoAcad) {
         super(id, email, nombre, apellido, identificacion);
-        Estado = estadoAcad;
+        this.Estado = estadoAcad;
     }
 
     public Eacademico getEstado() {

@@ -33,6 +33,9 @@ public class Usuario implements Serializable{
         this.apellido = apellido;
         this.identificacion = identificacion;
     }
+    public Usuario() {
+
+    }
 
     public String getNombre() {
         return nombre;

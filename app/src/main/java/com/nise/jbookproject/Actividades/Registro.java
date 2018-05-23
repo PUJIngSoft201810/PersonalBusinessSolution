@@ -59,9 +59,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             String name = editTextName.getText().toString();
             String lastName = editTextLastName.getText().toString();
             String identificacion=editTextIdent.getText().toString();
-
-
-
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -74,6 +71,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                         Toast.makeText(Registro.this,"Fallo: Usuario existente", Toast.LENGTH_SHORT).show();
                         editTextEmail.setText("");
                         editTextPass.setText("");
+                        editTextName.setText("");
+                        editTextLastName.setText("");
+                        editTextIdent.setText("");
                     }
                 }
             });

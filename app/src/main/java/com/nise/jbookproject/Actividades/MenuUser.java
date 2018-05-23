@@ -89,7 +89,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         final String idUser = mAuth.getUid();
         final boolean[] isAdmin = {false};
         Query ELAdmin =
-                adminRef.orderByChild("idU");
+                adminRef.orderByChild("idRef");
 
 // Attach a listener to read the data at our posts reference
         ELAdmin.addValueEventListener(new ValueEventListener() {
@@ -99,9 +99,9 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
                 for (DataSnapshot snap:dataSnapshot.getChildren()){
                     Administrador adm = dataSnapshot.getValue(Administrador.class);
                     System.out.println(adm.toString());
-                    if(adm.getId().equals(idUser)){
+                 /*   if(adm.getIdref().equals(null)||adm.getId().equals(idUser)){
                         isAdmin[0] |=true;
-                    }
+                    }*/
                     cont++;
                 }
                 if(cont==0)
