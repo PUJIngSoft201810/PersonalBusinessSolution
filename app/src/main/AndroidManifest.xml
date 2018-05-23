@@ -31,7 +31,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Actividades.HistorialReservasT"
-            android:label="@string/title_activity_historial_reservas_t"></activity>
+            android:label="@string/title_activity_historial_reservas_t" />
+        <activity android:name=".Actividades.Registro"></activity>
     </application>
 
 </manifest>

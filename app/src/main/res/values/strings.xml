@@ -21,4 +21,8 @@
     <string name="action_search">Search</string>
     <string name="search_hint">Type name…</string>
     <string name="title_activity_historial_reservas_t">HistorialReservasT</string>
+    <string name="title_activity_registro">Registro</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
