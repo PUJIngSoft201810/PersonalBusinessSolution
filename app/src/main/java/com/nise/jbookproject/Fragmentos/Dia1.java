@@ -193,9 +193,7 @@ public class Dia1 extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w(TAG, "postSalas:onCancelled", databaseError.toException());
-                Toast.makeText(getContext(), "Failed to load reservas.",
-                        Toast.LENGTH_SHORT).show();
-            }
+                }
         });
 
     }
