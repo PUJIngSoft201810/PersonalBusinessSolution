@@ -42,17 +42,36 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Descripcion"
+                    android:hint="Descripción"
                     android:inputType="textAutoCorrect|textAutoComplete"
                     android:textSize="16dp" />
 
-                <Spinner
-                    android:id="@+id/SpinnerLoc"
+                <RelativeLayout
+                    android:id="@+id/Ubicacion"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:entries="@array/Locations_arrays"
-                    android:visibility="visible"></Spinner>
+                    android:layout_height="match_parent"
+                   >
+
+                    <TextView
+                        android:id="@+id/textView0"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:layout_margin="30dp"
+                        android:ems="10"
+                        android:text="  Ubicación" />
+
+                    <NumberPicker
+                        android:id="@+id/piso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_toRightOf="@id/textView0"
+
+                        ></NumberPicker>
+
+                </RelativeLayout>
+
 
                 <Spinner
                     android:id="@+id/SpinnerPC"

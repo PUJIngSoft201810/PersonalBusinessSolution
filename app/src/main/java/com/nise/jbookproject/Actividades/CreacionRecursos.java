@@ -32,13 +32,13 @@ import java.util.concurrent.locks.LockSupport;
 public class CreacionRecursos extends AppCompatActivity implements View.OnClickListener {
     Button buttonCrear;
     EditText Descripcion, NomSala, Autor, Titulo, Isbn;
-    Spinner spinnType, SpinnerLoc, SpinnerPC;
-    RelativeLayout NumeroControles, CapacidadSala;
-    NumberPicker NumControles, NumCapacidad;
+    Spinner spinnType, SpinnerPC;
+    RelativeLayout NumeroControles, CapacidadSala,layUbicacion;
+    NumberPicker NumControles, NumCapacidad,piso;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     String[] Category = {"Select", "Computador", "Consola", "Sala", "Libro", "Televisor"};
-
+    final String[] values= {"Piso 5","Piso 4","Piso 3","Piso 2","Piso 1","Piso 0","Sótano 1","Sótano 2"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +49,16 @@ public class CreacionRecursos extends AppCompatActivity implements View.OnClickL
         spinnType = (Spinner) findViewById(R.id.SpinnerType);
 
         Descripcion = (EditText) findViewById(R.id.Descripcion);
-        SpinnerLoc = (Spinner) findViewById(R.id.SpinnerLoc);
-
+        layUbicacion = (RelativeLayout) findViewById(R.id.Ubicacion);
+        piso = (NumberPicker) findViewById(R.id.piso);
+        piso.setMaxValue(values.length-1);
+        piso.setDisplayedValues(values);
+        piso.setWrapSelectorWheel(true);
         SpinnerPC = (Spinner) findViewById(R.id.SpinnerPC);
 
         NumeroControles = (RelativeLayout) findViewById(R.id.NumeroControles);
         NumControles = (NumberPicker) findViewById(R.id.NumControles);
+
 
         NomSala = (EditText) findViewById(R.id.NomSala);
         CapacidadSala = (RelativeLayout) findViewById(R.id.CapacidadSala);
@@ -145,17 +149,17 @@ public class CreacionRecursos extends AppCompatActivity implements View.OnClickL
         switch (view.getId())
         {
             case R.id.Crear:
-                CrearRecurso();
-                startActivity(new Intent(CreacionRecursos.this, MenuUser.class));
+                if(CrearRecurso())
+                    startActivity(new Intent(CreacionRecursos.this, MenuUser.class));
                 break;
         }
     }
 
-    private void CrearRecurso() {
+    private boolean CrearRecurso() {
         if (validateForm()) {
             String sTipoRecurso = String.valueOf(spinnType.getSelectedItem());
             String sDescripcion = Descripcion.getText().toString();
-            String Location = String.valueOf(SpinnerLoc.getSelectedItem());
+            String Location = values[piso.getValue()];
             String TipoPC = String.valueOf(SpinnerPC.getSelectedItem());
             int NumControl = NumControles.getValue();
             String sNomSala = NomSala.getText().toString();
@@ -203,7 +207,9 @@ public class CreacionRecursos extends AppCompatActivity implements View.OnClickL
 
             }
             Toast.makeText(CreacionRecursos.this, "Se ha creado un nuevo recurso "+sTipoRecurso, Toast.LENGTH_LONG).show();
+            return true;
         }
+        return false;
     }
 
     private boolean validateForm() {
@@ -221,8 +227,36 @@ public class CreacionRecursos extends AppCompatActivity implements View.OnClickL
         } else {
             Descripcion.setError(null);
         }
+        if(TipoRecurso.equals("Sala")){
+            String sNomSala = NomSala.getText().toString();
+            if (TextUtils.isEmpty(sNomSala)) {
+                NomSala.setError("Required.");
+                valid = false;
+            } else {
+                NomSala.setError(null);
+            }
 
-
+        }if(TipoRecurso.equals("Libro")){
+            String sAutor = Autor.getText().toString();
+            String sTitulo = Titulo.getText().toString();
+            String sIsbn = Isbn.getText().toString();
+            if (TextUtils.isEmpty(sAutor)) {
+                Autor.setError("Required.");
+                valid = false;
+            } else {
+                Autor.setError(null);
+            }if (TextUtils.isEmpty(sTitulo)) {
+                Titulo.setError("Required.");
+                valid = false;
+            } else {
+                Titulo.setError(null);
+            }if (TextUtils.isEmpty(sIsbn)) {
+                Isbn.setError("Required.");
+                valid = false;
+            } else {
+                Isbn.setError(null);
+            }
+        }
         return valid;
     }
 
