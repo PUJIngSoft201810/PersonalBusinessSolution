@@ -83,6 +83,11 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Actividades.HistorialReservasT"
+            android:label="@string/title_activity_historial_reservas_t" />
+        <activity android:name=".Actividades.Registro" />
+        <activity android:name=".Actividades.RegistroAdm" />
+        <activity android:name=".Actividades.CreacionRecursos" />
             android:name=".Actividades.HistorialReservasNav"
             android:label="@string/title_activity_historial_reservas_nav"
             android:screenOrientation="portrait"/>

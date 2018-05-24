@@ -80,22 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
     }
 
-    private void registrar(String email, String pass){
-        mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("SESION","signInWithEmail:onComplete:" + task.isSuccessful());
-                if(task.isSuccessful()){
-                    Log.i("SESION", "usuario creado correctamente");
-                }
-                else{
-                    Log.w("SESION","signInWithEmail:failed", task.getException());
-                    Toast.makeText(MainActivity.this,"Fallo: Usuario existente", Toast.LENGTH_SHORT).show();
-                    editTextEmail.setText("");
-                    editTextPass.setText("");
-                }
-            }
-        });
+    private void registrar(){
+        Log.d("CREATION","sE HA PRESIONADO REGISTRAR");
+        startActivity(new Intent(MainActivity.this, Registro.class));
     }
     private void iniciarSesion(){
         if(validateForm()){
@@ -123,9 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 iniciarSesion();
                 break;
             case R.id.register:
-                String emailRegister = editTextEmail.getText().toString();
-                String passRegister = editTextPass.getText().toString();
-                registrar(emailRegister,passRegister);
+                registrar();
                 break;
         }
     }

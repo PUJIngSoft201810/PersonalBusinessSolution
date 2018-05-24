@@ -13,5 +13,10 @@ public class FirebaseReferences {
     final public static String ACADEMICOS_REFERENCE = "academicos";
     final public static String FUNCIONARIOS_REFERENCE = "funcionarios";
     final public static String ADMINISTRADORES_REFERENCE = "administradores";
+    final public static String USUARIO_REFERENCE = "usuarios";
+    final public static String ACADEMICO_REFERENCE = "academicos";
+    final public static String FUNCIONARIO_REFERENCE = "funcionarios";
+    final public static String ADMNIISTRADOR_REFERENCE = "administradores";
+
 }
 
