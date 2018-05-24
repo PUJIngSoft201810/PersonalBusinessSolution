@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.nise.jbookproject.Actividades.CreacionRecursos">
+    <RelativeLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.nise.jbookproject.Actividades.Registro">
+        android:background="@drawable/new_registry_gradientes"
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignEnd="@+id/register"
+            android:layout_alignParentTop="true"
+            android:scrollbarStyle="outsideOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/SpinnerType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:entries="@array/typeRec_arrays"
+                    android:visibility="visible"></Spinner>
+
+                <EditText
+                    android:id="@+id/Descripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="Descripcion"
+                    android:inputType="textAutoCorrect|textAutoComplete"
+                    android:textSize="16dp" />
+
+                <Spinner
+                    android:id="@+id/SpinnerLoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:entries="@array/Locations_arrays"
+                    android:visibility="visible"></Spinner>
+
+                <Spinner
+                    android:id="@+id/SpinnerPC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:entries="@array/typePC_arrays"
+                    android:visibility="gone"></Spinner>
+                <RelativeLayout
+                    android:id="@+id/NumeroControles"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:layout_margin="20dp"
+                        android:ems="10"
+                        android:text="Numero de controles" />
+
+                    <NumberPicker
+                        android:id="@+id/NumControles"
+                        android:layout_width="50dp"
+                        android:layout_height="90dp"
+                        android:layout_toRightOf="@id/textView5"
+                        android:layout_marginHorizontal="50dp"
+                        ></NumberPicker>
+
+                </RelativeLayout>
+                <EditText
+                    android:id="@+id/NomSala"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="Nombre de la sala"
+                    android:inputType="textAutoCorrect|textAutoComplete"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <RelativeLayout
+                    android:id="@+id/CapacidadSala"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:layout_margin="20dp"
+                        android:ems="10"
+                        android:text="Capacidad de la sala" />
+
+                    <NumberPicker
+                        android:id="@+id/NumCapacidad"
+                        android:layout_width="50dp"
+                        android:layout_height="90dp"
+                        android:layout_toRightOf="@id/textView6"
+                        android:layout_marginHorizontal="50dp"></NumberPicker>
+
+                </RelativeLayout>
+                <EditText
+                    android:id="@+id/Autor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="Autor"
+                    android:inputType="textAutoCorrect|textAutoComplete"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/Titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="Titulo"
+                    android:inputType="textAutoCorrect|textAutoComplete"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/Isbn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="Isbn"
+                    android:inputType="number"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+
+            style="@style/Widget.AppCompat.Button.Colored"
+
+            android:id="@+id/Crear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="Crear" />
+
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -25,7 +25,7 @@ import java.util.Calendar;
 
 
 public class MenuUser extends AppCompatActivity implements View.OnClickListener {
-    Button buttonConsulta, buttonReserva, buttonRegresar, buttonCerrar,buttonRegistrar;
+    Button buttonConsulta, buttonReserva, buttonRegresar, buttonCerrar,buttonRegistrar,buttonCrear;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase database ;
@@ -41,6 +41,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonRegresar = (Button) findViewById(R.id.regresarButton);
         buttonCerrar = (Button) findViewById(R.id.cerrarButton);
         buttonRegistrar =(Button) findViewById(R.id.registrarButton) ;
+        buttonCrear =(Button) findViewById(R.id.crearButton) ;
         buttonConsulta.setOnClickListener(this);
         isAdmin();
 
@@ -73,6 +74,12 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(MenuUser.this, RegistroAdm.class));
             }
         });
+        buttonCrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuUser.this, CreacionRecursos.class));
+            }
+        });
         buttonCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,13 +99,24 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
 
         final String idUser = mAuth.getUid();
-        try {
-            DatabaseReference adminIDRef = adminRef.child(idUser);
-            System.out.println("**************database is "+adminIDRef.getDatabase());
-            buttonRegistrar.setVisibility(View.VISIBLE);
-        }catch (Exception e){
-            System.out.println("**************is not  aDmin ");
-        }
+        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(idUser)) {
+                    System.out.println("**************database is ");
+                    buttonRegistrar.setVisibility(View.VISIBLE);
+                    buttonCrear.setVisibility(View.VISIBLE);
+                }else{
+                    System.out.println("**************is not  aDmin ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
