@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragmentos.TelevisionFr">
+    tools:context=".Fragmentos.ConsolaFr">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerResTel"
+        android:id="@+id/recyclerResCons"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

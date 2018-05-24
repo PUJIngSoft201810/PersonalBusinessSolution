@@ -1,55 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Actividades.MenuReserva">
 
-    <Button
-        android:id="@+id/libroButton"
-        android:layout_width="118dp"
-        android:layout_height="61dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/computadorButton"
-        android:layout_marginTop="170dp"
-        android:text="Libro" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="45dp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <Button
-        android:id="@+id/computadorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="75dp"
-        android:text="Computador" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/consolaButton"
-        android:layout_width="117dp"
-        android:layout_height="68dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/computadorButton"
-        android:layout_marginEnd="53dp"
-        android:text="Consola" />
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/salaButton"
-        android:layout_width="114dp"
-        android:layout_height="62dp"
-        android:layout_alignStart="@+id/consolaButton"
-        android:layout_alignTop="@+id/libroButton"
-        android:text="Sala" />
+                <ImageButton
+                    android:id="@+id/imageButtonComputador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_computador"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/televisorButton"
-        android:layout_width="110dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="192dp"
-        android:layout_marginEnd="128dp"
-        android:text="Televisor" />
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-</RelativeLayout>
+                <ImageButton
+                    android:id="@+id/imageButtonConsola"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_consola"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imageButtonLibro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_libro"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imageButtonSala"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_sala"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="207dp"
+            android:layout_height="193dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imageButtonTelevisor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_televisor"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -6,6 +6,7 @@
     <string name="title_computers">Computadores</string>
     <string name="title_console">Consolas</string>
     <string name="title_television">Televisores</string>
+    <string name="title_back">Regresar</string>
     <string name="title_room">Salas</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_reservar_sala_dia">ReservarSalaDia</string>
@@ -49,4 +50,9 @@
     <string name="title_activity_crear_usuario">CrearUsuario</string>
     <string name="title_activity_reglas">Reglas</string>
     <string name="title_activity_noticias">Noticias</string>
+    <string name="title_activity_historial_reservas_nav">HistorialReservasNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_activity_consultar_reservas_activas_nav">ConsultarReservasActivasNav
+    </string>
 </resources>

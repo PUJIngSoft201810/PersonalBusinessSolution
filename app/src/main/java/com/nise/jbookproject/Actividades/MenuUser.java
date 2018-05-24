@@ -132,7 +132,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
                     case MotionEvent.ACTION_UP:
 
                         // Your action here on button click
-                        startActivity(new Intent(MenuUser.this, ConsultarReservasActivas.class));
+                        startActivity(new Intent(MenuUser.this, ConsultarReservasActivasNav.class));
 
                     case MotionEvent.ACTION_CANCEL: {
                         ImageButton view = (ImageButton) v;
@@ -186,7 +186,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
                     case MotionEvent.ACTION_UP:
 
                         // Your action here on button click
-                        startActivity(new Intent(MenuUser.this, HistorialReservas.class));
+                        startActivity(new Intent(MenuUser.this, HistorialReservasNav.class));
 
                     case MotionEvent.ACTION_CANCEL: {
                         ImageButton view = (ImageButton) v;
