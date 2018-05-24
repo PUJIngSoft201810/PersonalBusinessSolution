@@ -2,48 +2,74 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Actividades.MenuAdmin">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingTop="45dp"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
-            android:layout_width="203dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/crearRecursoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Crear Recurso" />
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <ImageButton
+                    android:id="@+id/imageButtonCrearUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_crear_usuario"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imageButtonCrearRecurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_crear_recurso"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="228dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/crearUsuariobutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Crear Usuario" />
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/cerrarButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="cerrar sesion" />
+                <ImageButton
+                    android:id="@+id/imageButtonCerrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_cerrar_sesion"
+                    android:scaleType="fitCenter"
+                    android:scaleY="0.55" />
+            </LinearLayout>
+
         </LinearLayout>
+
+
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

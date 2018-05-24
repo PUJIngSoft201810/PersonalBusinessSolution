@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextEmail, editTextPass;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private boolean esAdmin = false;
+    private boolean esAdmin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
