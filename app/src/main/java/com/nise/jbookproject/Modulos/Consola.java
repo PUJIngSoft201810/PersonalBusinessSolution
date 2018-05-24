@@ -20,6 +20,10 @@ public class Consola extends Recurso {
         super(id, descripcion, estado, ubicacion);
     }
 
+    public  Consola(){
+
+    }
+
     @Override
     public String toString() {
         return "Consola{" +

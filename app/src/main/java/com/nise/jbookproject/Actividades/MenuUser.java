@@ -16,7 +16,7 @@ import com.nise.jbookproject.R;
 
 
 public class MenuUser extends AppCompatActivity implements View.OnClickListener {
-    Button buttonConsulta, buttonReserva, buttonRegresar;
+    Button buttonConsulta, buttonReserva, buttonRegresar, buttonCerrar;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -30,6 +30,7 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonConsulta = (Button) findViewById(R.id.consultaButton);
         buttonReserva = (Button) findViewById(R.id.reservaButton);
         buttonRegresar = (Button) findViewById(R.id.regresarButton);
+        buttonCerrar = (Button) findViewById(R.id.cerrarButton);
         buttonConsulta.setOnClickListener(this);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -43,13 +44,22 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
         buttonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuUser.this, HistorialReservas.class));
+                startActivity(new Intent(MenuUser.this, HistorialReservasT.class));
             }
         });
         buttonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MenuUser.this, ConsultarReservasActivas.class));
+            }
+        });
+        buttonCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(MenuUser.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

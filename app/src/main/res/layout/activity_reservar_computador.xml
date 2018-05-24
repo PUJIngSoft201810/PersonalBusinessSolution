@@ -17,22 +17,44 @@
         android:text="Reservar Computador"
         tools:fontFamily="sans-serif" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerComputador"
-        android:layout_width="match_parent"
-        android:layout_height="405dp"
-        android:layout_alignParentStart="true"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="236dp"
+        android:layout_height="65dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="51dp"
-        android:scrollbars="vertical"
-        android:theme="@android:style/Animation" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="162dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarComputadorMesa"
+        android:text="Mesa" />
 
     <Button
-        android:id="@+id/crearComp"
+        android:id="@+id/button2"
+        android:layout_width="248dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="121dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarComputadorPortatil"
+        android:text="Portatil" />
+
+    <TextView
+        android:id="@+id/textCantMesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="121dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textCantPortatil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="CrearCompuador" />
+        android:layout_marginBottom="205dp"
+        android:text="TextView" />
 
 </RelativeLayout>

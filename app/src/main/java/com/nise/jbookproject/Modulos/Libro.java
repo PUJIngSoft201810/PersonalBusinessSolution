@@ -1,7 +1,15 @@
 package com.nise.jbookproject.Modulos;
 
 public class Libro extends Recurso {
-    String autor, titulo, isbn;
+    String autor, titulo, isbn, image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getAutor() {
         return autor;

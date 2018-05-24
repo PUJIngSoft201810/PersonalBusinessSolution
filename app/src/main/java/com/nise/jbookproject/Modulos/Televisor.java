@@ -6,6 +6,9 @@ public class Televisor extends Recurso {
         super(id, descripcion, estado, ubicacion);
     }
 
+    public Televisor(){
+    }
+
     @Override
     public String toString() {
         return "Televisor{" +

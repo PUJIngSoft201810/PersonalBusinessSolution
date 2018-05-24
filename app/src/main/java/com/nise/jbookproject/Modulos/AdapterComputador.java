@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -32,9 +33,9 @@ public class AdapterComputador extends RecyclerView.Adapter<AdapterComputador.Co
         //LO QUE SE QUIERE HACER
 
         Computador computador = computadores.get(position);
-        holder.textViewComputador.setText("Computador: "+computador.getDescripcion()+ "\n   Id computador: " + computador.getId()+ "\n");
-        //holder.textViewRecurso.setText(reserva.getRecurso());
-        //holder.textViewIdUsuario.setText(reserva.getIdUsuario()+"");
+        holder.textViewIdComputador.setText(("Id computador: " + computador.getId()));
+        holder.textViewDescripcionComputador.setText("Descripcion: " + computador.getDescripcion());
+        holder.textViewUbicacionComputador.setText("Ubicacion: " + computador.getUbicacion());
     }
 
     @Override
@@ -44,12 +45,13 @@ public class AdapterComputador extends RecyclerView.Adapter<AdapterComputador.Co
 
     public static class ComputadoresViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewComputador, textViewIdUsuario;
+        TextView textViewIdComputador, textViewDescripcionComputador, textViewUbicacionComputador;
         public ComputadoresViewHolder(View itemView) {
             super(itemView);
 
-            textViewComputador = itemView.findViewById(R.id.textview_computador);
-            //  textViewIdUsuario = itemView.findViewById(R.id.textview_idusuario);
+            textViewIdComputador = itemView.findViewById(R.id.textview_IdComputador);
+            textViewDescripcionComputador = itemView.findViewById(R.id.textview_DescripcionComputador);
+            textViewUbicacionComputador= itemView.findViewById(R.id.textview_UbicacionComputador);
         }
     }
 }

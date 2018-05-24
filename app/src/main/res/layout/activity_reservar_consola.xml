@@ -12,6 +12,25 @@
         android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
         android:text="Reservar Consola" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="310dp"
+        android:layout_height="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarConsola"
+        android:text="Reserva tu Consola" />
+
+    <TextView
+        android:id="@+id/textCantConsolas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:text="TextView" />
 </RelativeLayout>

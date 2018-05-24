@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,8 @@ public class ReservarLibro extends AppCompatActivity {
     RecyclerView rv;
     List<Libro> libros;
     AdapterLibro adapterLibro;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,8 @@ public class ReservarLibro extends AppCompatActivity {
         final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
         final DatabaseReference reservaRef = proyectoRef.child(FirebaseReferences.RESERVA_REFERENCE);
         final DatabaseReference recursosRef= proyectoRef.child(FirebaseReferences.RECURSOS_REFERENCE);
-        final DatabaseReference librosRef = recursosRef.child(FirebaseReferences.LIBROS_REFERENCE);
+        final DatabaseReference librosRecRef = recursosRef.child(FirebaseReferences.LIBROS_REFERENCE);
+        final DatabaseReference librosResRef = reservaRef.child(FirebaseReferences.LIBROS_REFERENCE);
 
         rv.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), rv, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -66,7 +70,7 @@ public class ReservarLibro extends AppCompatActivity {
                 Libro libro = libros.get(position);
                 Toast.makeText(getApplicationContext(), libro.getId() + " reservado", Toast.LENGTH_SHORT).show();
                 libro.setReservado(true);
-                librosRef.child(libro.getId()).setValue(libro);
+                librosRecRef.child(libro.getId()).setValue(libro);
 
                 Date fecha_inicio, fecha_fin;
                 fecha_inicio = Calendar.getInstance().getTime();
@@ -75,8 +79,12 @@ public class ReservarLibro extends AppCompatActivity {
                 cal.add(Calendar.DAY_OF_YEAR, 15);
                 fecha_fin = cal.getTime();
 
-                Reserva reserva = new Reserva("Prueba","1032428174",libros.get(position).getId(),libros.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
-                DatabaseReference miReserva = reservaRef.push();
+                mAuth = FirebaseAuth.getInstance();
+                String idUser = mAuth.getUid();
+                Log.i("USER ","Usuario :"+idUser);
+
+                Reserva reserva = new Reserva("Prueba",idUser,libros.get(position).getId(),libros.get(position).getDescripcion(),true,fecha_inicio,fecha_fin);
+                DatabaseReference miReserva = librosResRef.push();
                 reserva.setIdReserva(miReserva.getKey().toString());
                 miReserva.setValue(reserva);
 
@@ -89,7 +97,7 @@ public class ReservarLibro extends AppCompatActivity {
             }
         }));
 
-        librosRef.addValueEventListener(new ValueEventListener() {
+        librosRecRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 libros.removeAll(libros);
@@ -117,7 +125,7 @@ public class ReservarLibro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Libro libro = new Libro("Prueba","libro",false,"sotano 1", " Gabriel Garcia Marquez", "100 Años de soledad","Lib101");
-                DatabaseReference miLibro = librosRef.push();
+                DatabaseReference miLibro = librosRecRef.push();
                 libro.setId(miLibro.getKey().toString());
                 miLibro.setValue(libro);
             }

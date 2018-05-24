@@ -2,8 +2,11 @@
     <string name="app_name">JBook</string>
     <string name="title_activity_consulta_reservas">ConsultaReservas</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_book">Libros</string>
+    <string name="title_computers">Computadores</string>
+    <string name="title_console">Consolas</string>
+    <string name="title_television">Televisores</string>
+    <string name="title_room">Salas</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_reservar_sala_dia">ReservarSalaDia</string>
     <string name="tab_text_1">Tab 1</string>
@@ -14,4 +17,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toolbar_title">Contacts</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Type name…</string>
+    <string name="title_activity_historial_reservas_t">HistorialReservasT</string>
+    <string name="title_activity_agregar_recurso">agregarRecurso</string>
 </resources>

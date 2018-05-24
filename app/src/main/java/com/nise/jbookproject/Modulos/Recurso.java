@@ -61,15 +61,13 @@ public class Recurso implements Serializable{
         this.reservado = reservado;
         this.ubicacion = ubicacion;
     }
-
-    public Recurso(String id, String nombre, String descripcion, boolean reservado, String ubicacion) {
+    public Recurso(String id,String nombre, String descripcion, boolean reservado, String ubicacion) {
         this.id = id;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.reservado = reservado;
         this.ubicacion = ubicacion;
-        this.nombre = nombre;
     }
-
     @Override
     public String toString() {
         return "Recurso{" +

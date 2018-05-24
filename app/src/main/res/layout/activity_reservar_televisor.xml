@@ -7,11 +7,31 @@
     tools:context=".Actividades.ReservarTelevisor">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="146dp"
         android:text="Reservar Televisor" />
+
+    <TextView
+        android:id="@+id/textCantTele"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="310dp"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="156dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarTelevisor"
+        android:text="Reserva tu televisor" />
+
 </RelativeLayout>
