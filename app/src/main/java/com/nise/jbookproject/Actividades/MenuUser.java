@@ -98,7 +98,6 @@ public class MenuUser extends AppCompatActivity implements View.OnClickListener 
             buttonRegistrar.setVisibility(View.VISIBLE);
         }catch (Exception e){
             System.out.println("**************is not  aDmin ");
-
         }
     }
 

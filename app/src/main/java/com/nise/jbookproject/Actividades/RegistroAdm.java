@@ -51,17 +51,38 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
     }
     private void registrar() {
         if(validateForm()){
-            String email = editTextEmail.getText().toString();
+            final String email = editTextEmail.getText().toString();
             String password = editTextPass.getText().toString();
-            String name = editTextName.getText().toString();
-            String lastName = editTextLastName.getText().toString();
-            String identificacion=editTextIdent.getText().toString();
+            final String name = editTextName.getText().toString();
+            final String lastName = editTextLastName.getText().toString();
+            final String identificacion=editTextIdent.getText().toString();
+            final String tipo= String.valueOf(spinnType.getSelectedItem());
+
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.d("SESION","signInWithEmail:onComplete:" + task.isSuccessful());
                     if(task.isSuccessful()){
                         Log.i("SESION", "usuario creado correctamente");
+
+                        final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
+                        final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
+                        final DatabaseReference funcionarioRef = usuarioRef.child(FirebaseReferences.FUNCIONARIO_REFERENCE);
+                        final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
+                        String idUser = mAuth.getUid();
+                        if(tipo.equals("Funcionario")){
+                            Funcionario fun= new Funcionario(idUser,email,name,lastName,identificacion);
+                            DatabaseReference miUsuario = funcionarioRef.child(idUser);
+                            fun.setIdref(null);
+                            miUsuario.setValue(fun);
+                            Log.i("USER ","funcionario in if");
+                        }else if(tipo.equals("Administrador")){
+                            Administrador adm= new Administrador(idUser,email,name,lastName,identificacion);
+                            DatabaseReference miUsuario = adminRef.child(idUser);
+                            adm.setIdref(null);
+                            miUsuario.setValue(adm);
+                            Log.i("USER ","admin in if");
+                        }
                     }
                     else{
                         Log.w("SESION","signInWithEmail:failed", task.getException());
@@ -74,28 +95,6 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
                     }
                 }
             });
-            String tipo= String.valueOf(spinnType.getSelectedItem());
-
-            final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
-            final DatabaseReference usuarioRef = proyectoRef.child(FirebaseReferences.USUARIO_REFERENCE);
-            final DatabaseReference funcionarioRef = usuarioRef.child(FirebaseReferences.FUNCIONARIO_REFERENCE);
-            final DatabaseReference adminRef = usuarioRef.child(FirebaseReferences.ADMNIISTRADOR_REFERENCE);
-            String idUser = mAuth.getUid();
-
-            if(tipo.equals("Funcionario")){
-
-                Funcionario fun= new Funcionario(idUser,email,name,lastName,identificacion);
-                DatabaseReference miUsuario = funcionarioRef.child(idUser);
-                fun.setIdref(miUsuario.getKey().toString());
-                miUsuario.setValue(fun);
-                Log.i("USER ","funcionario in if");
-            }else if(tipo.equals("Administrador")){
-                Administrador adm= new Administrador(idUser,email,name,lastName,identificacion);
-                DatabaseReference miUsuario = adminRef.child(idUser);
-                adm.setIdref(miUsuario.getKey().toString());
-                miUsuario.setValue(adm);
-                Log.i("USER ","admin in if");
-            }
         }
     }
     private boolean validateForm() {
@@ -128,14 +127,13 @@ public class RegistroAdm extends AppCompatActivity implements View.OnClickListen
         } else {
             editTextLastName.setError(null);
         }
-        String identificacion = editTextIdent.getText().toString();
-        if (TextUtils.isEmpty(identificacion)) {
+        String ident = editTextIdent.getText().toString();
+        if (TextUtils.isEmpty(ident)) {
             editTextIdent.setError("Required.");
             valid = false;
         } else {
             editTextIdent.setError(null);
         }
-
         return valid;
     }
     public void onClick(View view)
