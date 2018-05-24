@@ -1,10 +1,12 @@
 package com.nise.jbookproject.Fragmentos;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.nise.jbookproject.Actividades.ReservarConsola;
 import com.nise.jbookproject.Actividades.ReservarSala;
 import com.nise.jbookproject.Adaptadores.AdapterDiaHora;
 import com.nise.jbookproject.Adaptadores.AdapterSala;
@@ -58,6 +61,8 @@ public class Dia1 extends Fragment {
     ArrayList<Reserva> horas;
     RecyclerView recyclerView;
     AdapterDiaHora adapterDiaHora;
+
+    private AlertDialog.Builder alertBuilder;
 
     private TextView titulo;
 
@@ -111,6 +116,7 @@ public class Dia1 extends Fragment {
         titulo = v.findViewById(R.id.tituloDia1);
         titulo.setText("");
         //titulo.setText(mParam2.toString());
+        configurarAlertDialog();
         llenarLista();
         eventoClickRow();
         configurarDB();
@@ -251,8 +257,11 @@ public class Dia1 extends Fragment {
                             child("salas").push();
                     reservaSelect.setIdReserva(p1.getKey().toString());
                     p1.setValue(reservaSelect);
-                    Toast.makeText(getContext(), "Se ha realizado la reserva",
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Se ha realizado la reserva",
+                          //  Toast.LENGTH_SHORT).show();
+                    AlertDialog nuevoAlertDialog = alertBuilder.create();
+                    nuevoAlertDialog.setMessage("Sala " + mParam1.getId().substring(mParam1.getId().length() - 3) + " Asignada.");
+                    nuevoAlertDialog.show();
                 }
             }
 
@@ -261,5 +270,18 @@ public class Dia1 extends Fragment {
 
             }
         }));
+    }
+
+    private void configurarAlertDialog(){
+        alertBuilder = new AlertDialog.Builder(getContext());
+        alertBuilder.setTitle("Exito Reserva");
+
+        alertBuilder.setMessage("Se ha reservado la sala")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
     }
 }

@@ -14,20 +14,23 @@
         android:layout_centerHorizontal="true"
         android:text="Reservar Consola" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerConsola"
-        android:layout_width="match_parent"
-        android:layout_height="368dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="57dp" />
-
     <Button
-        android:id="@+id/crearCons"
+        android:id="@+id/button3"
+        android:layout_width="310dp"
+        android:layout_height="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarConsola"
+        android:text="Reserva tu Consola" />
+
+    <TextView
+        android:id="@+id/textCantConsolas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="66dp"
-        android:text="Crear consola" />
+        android:layout_marginTop="129dp"
+        android:text="TextView" />
 </RelativeLayout>

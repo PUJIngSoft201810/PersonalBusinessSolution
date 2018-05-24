@@ -14,20 +14,24 @@
         android:layout_centerHorizontal="true"
         android:text="Reservar Televisor" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerTelevisor"
-        android:layout_width="match_parent"
-        android:layout_height="529dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp" />
-
-    <Button
-        android:id="@+id/crearTelevisor"
+    <TextView
+        android:id="@+id/textCantTele"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:text="crear televisor" />
+        android:layout_marginTop="122dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="310dp"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="156dp"
+        android:background="@color/colorAccent"
+        android:onClick="reservarTelevisor"
+        android:text="Reserva tu televisor" />
+
 </RelativeLayout>

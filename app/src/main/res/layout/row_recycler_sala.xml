@@ -19,20 +19,19 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView3"
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="66dp"
                 android:layout_weight="1"
-                android:text="Imagen"
-                android:textAlignment="center" />
+                app:srcCompat="@drawable/ic_streetview_black_24dp" />
 
             <TextView
                 android:id="@+id/rowSalaCapacidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6 Personas"
+                android:text="6 Per."
                 android:textAlignment="center"
                 android:textSize="14sp" />
         </LinearLayout>
