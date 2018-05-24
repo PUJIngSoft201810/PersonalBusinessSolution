@@ -18,6 +18,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nise.jbookproject.Modulos.Computador;
+import com.nise.jbookproject.Modulos.FirebaseReferences;
 import com.nise.jbookproject.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,10 +33,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private boolean esAdmin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference proyectoRef = database.getReference(FirebaseReferences.PROYECTO_REFERENCE);
+        final DatabaseReference usuariosRef = proyectoRef.child(FirebaseReferences.USUARIOS_REFERENCE);
+        final DatabaseReference administradoresRef= usuariosRef.child(FirebaseReferences.ADMINISTRADORES_REFERENCE);
 
         buttonLogIn = (Button) findViewById(R.id.signin);
         buttonRegister = (Button) findViewById(R.id.register);
@@ -48,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     // User is signed in
                     Log.d("SESION", "onAuthStateChanged:signed_in:" + user.getEmail());
+
                     if(esAdmin)
                     {
                         startActivity(new Intent(MainActivity.this, MenuAdmin.class));

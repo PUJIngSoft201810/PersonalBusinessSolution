@@ -141,13 +141,35 @@ public class ReservarSala extends AppCompatActivity {
     }
 
     public void addSala(View view) {
-        Sala sala1 = new Sala("1","sala a", "Tablero digital y tablero físico", false, "Piso 2", 6);
-        Sala sala2 = new Sala("2","sala z", "Televisor 40 pulgadas", false, "Sótano 1", 8);
         DatabaseReference p1 = mDatabase.push();
-        sala1.setId(p1.getKey().toString());
-        p1.setValue(sala1);
-        DatabaseReference p2 = mDatabase.push();
-        sala2.setId(p2.getKey().toString());
-        p2.setValue(sala2);
+        Sala sala = new Sala(p1.getKey().toString(), "Sala 1", "Tablero digital y tablero físico", false, "Piso 2", 6);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala 2", "Tablero digital y tablero físico", false, "Piso 2", 6);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala 3", "Tablero digital y tablero físico", false, "Piso 2", 8);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala 4", "Tablero físico", false, "Piso 2", 8);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala 5", "Tablero físico", false, "Piso 2", 4);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala 6", "Tablero físico", false, "Piso 2", 4);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala S1", "Tablero digital", false, "Sotano 1", 10);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala S2", "Tablero digital", false, "Sotano 2", 10);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala S3", "Televisor", false, "Sotano 2", 5);
+        p1.setValue(sala);
+        p1 = mDatabase.push();
+        sala = new Sala(p1.getKey().toString(), "Sala S3", "Televisor", false, "Sotano 1", 5);
+        p1.setValue(sala);
     }
 }

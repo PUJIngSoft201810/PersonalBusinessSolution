@@ -120,10 +120,28 @@ public class ReservarTelevisor extends AppCompatActivity {
         buttonCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Televisor televisor = new Televisor("Prueba","Televisor Samsung 201",false,"sotano 1");
+                DatabaseReference miTelevisor = televisoresRecRef.push();
+                Televisor televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                miTelevisor = televisoresRecRef.push();
+                televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                miTelevisor = televisoresRecRef.push();
+                televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                miTelevisor = televisoresRecRef.push();
+                televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                miTelevisor = televisoresRecRef.push();
+                televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                miTelevisor = televisoresRecRef.push();
+                televisor = new Televisor(miTelevisor.getKey().toString(),"Televisor Samsung 201 42 pulgadas ",false,"sotano 1");
+                miTelevisor.setValue(televisor);
+                /*Televisor televisor = new Televisor("Prueba","Televisor Samsung 201",false,"sotano 1");
                 DatabaseReference miTelevisor = televisoresRecRef.push();
                 televisor.setId(miTelevisor.getKey().toString());
-                miTelevisor.setValue(televisor);
+                miTelevisor.setValue(televisor);*/
             }
         });
     }

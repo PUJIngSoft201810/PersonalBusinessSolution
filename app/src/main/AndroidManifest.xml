@@ -9,16 +9,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Actividades.MainActivity">
+        <activity
+            android:name=".Actividades.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Actividades.MenuUser" />
+        <activity android:name=".Actividades.MenuUser"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".Actividades.HistorialReservas" />
-        <activity android:name=".Actividades.ReservarLibro" />
+        <activity
+            android:name=".Actividades.ReservarLibro"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Actividades.MenuReserva" />
         <activity android:name=".Actividades.ReservarComputador" />
         <activity android:name=".Actividades.ReservarConsola" />

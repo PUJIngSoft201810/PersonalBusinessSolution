@@ -38,7 +38,7 @@ public class ConsultarReservasActivas extends AppCompatActivity {
     AdapterHistorialReservas adapterComp, adapterLib, adapterCons, adapterTel, adapterSal;
 
     private FirebaseAuth mAuth;
-    private boolean esFuncionario = false;
+    private boolean esFuncionario = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

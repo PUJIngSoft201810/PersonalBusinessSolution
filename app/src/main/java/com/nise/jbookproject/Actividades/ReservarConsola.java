@@ -124,9 +124,20 @@ public class ReservarConsola extends AppCompatActivity {
         buttonCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Consola consola = new Consola("Prueba","Xbox One 101",false,"sotano 1",2);
                 DatabaseReference miConsola = consolasRecRef.push();
-                consola.setId(miConsola.getKey().toString());
+                Consola consola = new Consola(miConsola.getKey().toString(),"Xbox One Plus",false,"sotano 1",2);
+                miConsola.setValue(consola);
+                miConsola = consolasRecRef.push();
+                consola = new Consola(miConsola.getKey().toString(),"Xbox One Plus",false,"sotano 1",3);
+                miConsola.setValue(consola);
+                miConsola = consolasRecRef.push();
+                consola = new Consola(miConsola.getKey().toString(),"Xbox 360 Elite",false,"sotano 1",2);
+                miConsola.setValue(consola);
+                miConsola = consolasRecRef.push();
+                consola = new Consola(miConsola.getKey().toString(),"Xbox 360 Slim",false,"sotano 1",3);
+                miConsola.setValue(consola);
+                miConsola = consolasRecRef.push();
+                consola = new Consola(miConsola.getKey().toString(),"Xbox 360 Slim pro",false,"sotano 1",2);
                 miConsola.setValue(consola);
             }
         });
